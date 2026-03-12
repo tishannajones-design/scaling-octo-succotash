@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RGX Engage Design System v1.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--navy:#001f3f;--blue:#0074e4;--grey-dark:#292627;--white:#ffffff;--grey-light:#F7F7F7;
+--orange:#f15a24;--green:#00b859;--purple:#6c5ce7;--yellow:#f8bf00;--red:#d32f2f;
+--navy-90:rgba(0,31,63,0.9);--navy-70:rgba(0,31,63,0.7);--navy-50:rgba(0,31,63,0.5);--navy-30:rgba(0,31,63,0.3);--navy-10:rgba(0,31,63,0.1);
+--blue-90:rgba(0,116,228,0.9);--blue-70:rgba(0,116,228,0.7);--blue-50:rgba(0,116,228,0.5);--blue-30:rgba(0,116,228,0.3);--blue-10:rgba(0,116,228,0.1);
+--sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:20px;--sp-6:24px;--sp-8:32px;--sp-10:40px;--sp-12:48px;--sp-16:64px;--sp-20:80px;--sp-24:96px;
+--radius-sm:4px;--radius-md:6px;--radius-lg:8px;--radius-xl:12px;
+--shadow-xs:0 1px 2px rgba(0,31,63,0.05);--shadow-sm:0 1px 3px rgba(0,31,63,0.1);--shadow-md:0 4px 6px rgba(0,31,63,0.1);--shadow-lg:0 10px 15px rgba(0,31,63,0.1);--shadow-xl:0 20px 25px rgba(0,31,63,0.15);
+--font-display:Montserrat,system-ui,sans-serif;--font-body:Inter,system-ui,sans-serif;--font-mono:'JetBrains Mono',monospace;
+--text-xs:0.75rem;--text-sm:0.875rem;--text-base:1rem;--text-lg:1.125rem;--text-xl:1.25rem;--text-2xl:1.5rem;--text-3xl:1.875rem;--text-4xl:2.25rem;--text-5xl:3rem;
+--leading-tight:1.2;--leading-normal:1.5;--leading-relaxed:1.625;
+--transition:150ms ease;
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--grey-dark);background:var(--white);line-height:var(--leading-normal);-webkit-font-smoothing:antialiased}
+
+/* LAYOUT */
+.ds-layout{display:flex;min-height:100vh}
+.ds-sidebar{width:260px;background:var(--navy);color:var(--white);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:100;transition:transform .3s ease}
+.ds-sidebar::-webkit-scrollbar{width:4px}
+.ds-sidebar::-webkit-scrollbar-thumb{background:var(--navy-50);border-radius:2px}
+.ds-main{margin-left:260px;flex:1;min-width:0}
+
+.ds-logo{padding:24px 20px;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;gap:12px}
+.ds-logo svg{width:32px;height:32px;flex-shrink:0}
+.ds-logo-text{font-family:var(--font-display);font-weight:700;font-size:14px;letter-spacing:0.5px}
+.ds-logo-sub{font-size:10px;opacity:0.6;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+
+.ds-nav{padding:16px 0}
+.ds-nav-section{padding:0 16px;margin-bottom:4px}
+.ds-nav-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);padding:12px 8px 6px;display:block}
+.ds-nav-link{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:var(--radius-md);color:rgba(255,255,255,0.7);text-decoration:none;font-size:13px;font-weight:500;transition:all var(--transition);cursor:pointer;border:none;background:none;width:100%;text-align:left}
+.ds-nav-link:hover{background:rgba(255,255,255,0.08);color:var(--white)}
+.ds-nav-link.active{background:var(--blue);color:var(--white)}
+.ds-nav-link svg{width:16px;height:16px;opacity:0.6;flex-shrink:0}
+.ds-nav-link.active svg{opacity:1}
+
+/* SECTIONS */
+.ds-section{display:none;padding:40px 48px 80px;max-width:1200px}
+.ds-section.active{display:block}
+.ds-section-header{margin-bottom:40px;padding-bottom:24px;border-bottom:2px solid var(--grey-light)}
+.ds-section-title{font-family:var(--font-display);font-size:var(--text-4xl);font-weight:800;color:var(--navy);letter-spacing:-0.02em;margin-bottom:8px}
+.ds-section-desc{font-size:var(--text-lg);color:var(--navy-70);max-width:640px;line-height:var(--leading-relaxed)}
+
+/* CONTENT BLOCKS */
+.ds-card{background:var(--white);border:1px solid #e5e7eb;border-radius:var(--radius-lg);padding:24px;margin-bottom:24px}
+.ds-card-title{font-family:var(--font-display);font-weight:700;font-size:var(--text-lg);color:var(--navy);margin-bottom:12px}
+.ds-card-subtitle{font-size:var(--text-sm);color:var(--navy-50);margin-bottom:16px}
+
+.ds-grid{display:grid;gap:24px}
+.ds-grid-2{grid-template-columns:repeat(2,1fr)}
+.ds-grid-3{grid-template-columns:repeat(3,1fr)}
+.ds-grid-4{grid-template-columns:repeat(4,1fr)}
+.ds-grid-5{grid-template-columns:repeat(5,1fr)}
+
+/* COLOR SWATCHES */
+.swatch-group{margin-bottom:32px}
+.swatch-group-title{font-family:var(--font-display);font-weight:700;font-size:var(--text-base);color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.swatch-group-title::before{content:'';width:3px;height:18px;background:var(--blue);border-radius:2px}
+.swatch{border-radius:var(--radius-lg);overflow:hidden;border:1px solid #e5e7eb;transition:transform var(--transition),box-shadow var(--transition)}
+.swatch:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.swatch-color{height:100px;position:relative}
+.swatch-info{padding:12px 14px}
+.swatch-name{font-family:var(--font-display);font-weight:600;font-size:13px;color:var(--navy);margin-bottom:4px}
+.swatch-hex{font-family:var(--font-mono);font-size:11px;color:var(--navy-50);cursor:pointer;transition:color var(--transition)}
+.swatch-hex:hover{color:var(--blue)}
+.swatch-meta{font-size:10px;color:var(--navy-50);margin-top:4px;line-height:1.4}
+.swatch-badge{position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.3);color:white;font-size:9px;font-weight:600;padding:2px 6px;border-radius:3px;font-family:var(--font-mono)}
+.swatch-wcag{display:flex;gap:6px;margin-top:6px}
+.swatch-wcag span{font-size:9px;font-weight:600;padding:2px 5px;border-radius:3px}
+.wcag-pass{background:#dcfce7;color:#166534}
+.wcag-fail{background:#fef2f2;color:#991b1b}
+
+/* TYPOGRAPHY DISPLAY */
+.type-sample{padding:20px 0;border-bottom:1px solid var(--grey-light)}
+.type-sample:last-child{border-bottom:none}
+.type-label{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.type-tag{font-family:var(--font-mono);font-size:10px;background:var(--navy);color:var(--white);padding:2px 8px;border-radius:3px;font-weight:600}
+.type-specs{font-family:var(--font-mono);font-size:10px;color:var(--navy-50)}
+.type-preview{margin-top:4px;color:var(--grey-dark)}
+
+/* SPACING */
+.spacing-row{display:flex;align-items:center;gap:16px;padding:8px 0;border-bottom:1px solid var(--grey-light)}
+.spacing-visual{display:flex;align-items:center;gap:4px}
+.spacing-bar{height:24px;background:var(--blue-10);border:1px solid var(--blue-30);border-radius:2px;transition:background var(--transition)}
+.spacing-row:hover .spacing-bar{background:var(--blue-30)}
+.spacing-token{font-family:var(--font-mono);font-size:12px;color:var(--navy);width:80px;flex-shrink:0}
+.spacing-value{font-family:var(--font-mono);font-size:12px;color:var(--navy-50);width:50px;flex-shrink:0}
+
+/* COMPONENT PREVIEW */
+.comp-preview{background:var(--grey-light);border-radius:var(--radius-lg);padding:32px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:16px;margin-bottom:20px;min-height:120px}
+.comp-preview.dark{background:var(--navy)}
+.comp-states{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+.comp-anatomy{margin-bottom:20px}
+.comp-spec-table{width:100%;border-collapse:collapse;font-size:13px}
+.comp-spec-table th{text-align:left;font-weight:600;padding:8px 12px;background:var(--grey-light);color:var(--navy);font-family:var(--font-display);font-size:12px;text-transform:uppercase;letter-spacing:0.5px}
+.comp-spec-table td{padding:8px 12px;border-bottom:1px solid var(--grey-light);vertical-align:top}
+.comp-spec-table td:first-child{font-weight:500;color:var(--navy);width:180px}
+.comp-spec-table code{font-family:var(--font-mono);font-size:11px;background:var(--grey-light);padding:2px 6px;border-radius:3px;color:var(--navy)}
+
+/* TABS */
+.ds-tabs{display:flex;gap:0;border-bottom:2px solid var(--grey-light);margin-bottom:24px}
+.ds-tab{padding:10px 20px;font-size:13px;font-weight:600;color:var(--navy-50);cursor:pointer;border:none;background:none;font-family:var(--font-display);position:relative;transition:color var(--transition)}
+.ds-tab:hover{color:var(--navy)}
+.ds-tab.active{color:var(--blue)}
+.ds-tab.active::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:2px;background:var(--blue)}
+.ds-tab-content{display:none}
+.ds-tab-content.active{display:block}
+
+/* CODE BLOCK */
+.code-block{background:#1e1e2e;color:#cdd6f4;border-radius:var(--radius-lg);padding:20px;font-family:var(--font-mono);font-size:12px;line-height:1.6;overflow-x:auto;margin:12px 0;position:relative}
+.code-block .key{color:#89b4fa}
+.code-block .string{color:#a6e3a1}
+.code-block .number{color:#fab387}
+.code-block .comment{color:#6c7086;font-style:italic}
+.code-label{position:absolute;top:8px;right:12px;font-size:9px;font-weight:600;color:#6c7086;text-transform:uppercase;letter-spacing:1px}
+
+/* BUTTONS (component examples) */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-display);font-weight:600;border:none;cursor:pointer;transition:all var(--transition);text-decoration:none;white-space:nowrap}
+.btn-primary{background:var(--blue);color:var(--white);padding:10px 20px;border-radius:var(--radius-md);font-size:14px}
+.btn-primary:hover{background:#005bb5;box-shadow:var(--shadow-md)}
+.btn-primary:active{transform:scale(0.98)}
+.btn-primary:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.btn-primary.disabled{opacity:0.5;cursor:not-allowed;pointer-events:none}
+
+.btn-secondary{background:transparent;color:var(--blue);padding:10px 20px;border-radius:var(--radius-md);font-size:14px;border:1.5px solid var(--blue)}
+.btn-secondary:hover{background:var(--blue-10)}
+
+.btn-ghost{background:transparent;color:var(--navy);padding:10px 20px;border-radius:var(--radius-md);font-size:14px}
+.btn-ghost:hover{background:var(--navy-10)}
+
+.btn-danger{background:var(--red);color:var(--white);padding:10px 20px;border-radius:var(--radius-md);font-size:14px}
+.btn-danger:hover{background:#b71c1c}
+
+.btn-sm{padding:6px 14px;font-size:12px}
+.btn-lg{padding:14px 28px;font-size:16px}
+.btn-icon{width:36px;height:36px;padding:0;border-radius:var(--radius-md)}
+
+/* INPUT */
+.input{font-family:var(--font-body);font-size:14px;padding:10px 14px;border:1.5px solid #d1d5db;border-radius:var(--radius-md);background:var(--white);color:var(--grey-dark);transition:all var(--transition);width:100%;outline:none}
+.input:hover{border-color:#9ca3af}
+.input:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-10)}
+.input.error{border-color:var(--red);box-shadow:0 0 0 3px rgba(211,47,47,0.1)}
+.input.disabled{opacity:0.5;cursor:not-allowed;background:var(--grey-light)}
+
+/* BADGE */
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px;font-family:var(--font-display)}
+.badge-blue{background:var(--blue-10);color:var(--blue)}
+.badge-green{background:rgba(0,184,89,0.1);color:#047a3e}
+.badge-orange{background:rgba(241,90,36,0.1);color:#c24010}
+.badge-red{background:rgba(211,47,47,0.1);color:var(--red)}
+.badge-purple{background:rgba(108,92,231,0.1);color:var(--purple)}
+.badge-navy{background:var(--navy-10);color:var(--navy)}
+
+/* TOGGLE */
+.toggle{width:44px;height:24px;background:#d1d5db;border-radius:12px;position:relative;cursor:pointer;transition:background var(--transition);border:none}
+.toggle::after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;background:white;border-radius:50%;transition:transform var(--transition);box-shadow:var(--shadow-sm)}
+.toggle.on{background:var(--blue)}
+.toggle.on::after{transform:translateX(20px)}
+
+/* AVATAR */
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--blue);color:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:14px}
+.avatar-sm{width:28px;height:28px;font-size:11px}
+.avatar-lg{width:56px;height:56px;font-size:20px}
+
+/* TOOLTIP */
+.tooltip-demo{position:relative;display:inline-block}
+.tooltip-demo .tooltip-text{visibility:hidden;background:var(--navy);color:var(--white);font-size:12px;padding:6px 10px;border-radius:var(--radius-md);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);white-space:nowrap;z-index:10;opacity:0;transition:opacity var(--transition)}
+.tooltip-demo:hover .tooltip-text{visibility:visible;opacity:1}
+
+/* ALERT */
+.alert{padding:14px 16px;border-radius:var(--radius-md);display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.5;border-left:3px solid}
+.alert-info{background:var(--blue-10);border-color:var(--blue);color:#1a3a5c}
+.alert-success{background:rgba(0,184,89,0.08);border-color:var(--green);color:#0a4a25}
+.alert-warning{background:rgba(248,191,0,0.1);border-color:var(--yellow);color:#6b5900}
+.alert-error{background:rgba(211,47,47,0.08);border-color:var(--red);color:#7f1d1d}
+
+/* CARD COMPONENT */
+.card-component{background:var(--white);border:1px solid #e5e7eb;border-radius:var(--radius-lg);overflow:hidden;transition:box-shadow var(--transition)}
+.card-component:hover{box-shadow:var(--shadow-lg)}
+.card-component-img{height:160px;background:linear-gradient(135deg,var(--navy),var(--blue));display:flex;align-items:center;justify-content:center;color:white;font-family:var(--font-display);font-weight:700}
+.card-component-body{padding:20px}
+.card-component-title{font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--navy);margin-bottom:6px}
+.card-component-text{font-size:13px;color:var(--navy-70);line-height:1.5}
+
+/* CHIP / TAG */
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:500;border:1px solid #d1d5db;background:var(--white);color:var(--grey-dark);cursor:pointer;transition:all var(--transition)}
+.chip:hover{border-color:var(--blue);color:var(--blue)}
+.chip.selected{background:var(--blue);color:var(--white);border-color:var(--blue)}
+.chip .chip-remove{width:14px;height:14px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(0,0,0,0.15);font-size:10px;cursor:pointer}
+
+/* PROGRESS */
+.progress-bar{height:6px;background:var(--grey-light);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;border-radius:3px;transition:width 0.6s ease}
+
+/* SKELETON */
+.skeleton{background:linear-gradient(90deg,var(--grey-light) 25%,#ebebeb 50%,var(--grey-light) 75%);background-size:200% 100%;animation:skeleton-loading 1.5s infinite;border-radius:var(--radius-md)}
+@keyframes skeleton-loading{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* BREADCRUMB */
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--navy-50)}
+.breadcrumb a{color:var(--blue);text-decoration:none;font-weight:500}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb .sep{color:var(--navy-30)}
+
+/* TABLE */
+.ds-table{width:100%;border-collapse:collapse;font-size:13px}
+.ds-table th{text-align:left;padding:10px 14px;background:var(--grey-light);font-family:var(--font-display);font-weight:600;font-size:12px;color:var(--navy);letter-spacing:0.3px}
+.ds-table td{padding:10px 14px;border-bottom:1px solid var(--grey-light)}
+.ds-table tr:hover td{background:rgba(0,116,228,0.02)}
+
+/* CHECKBOX / RADIO */
+.checkbox-demo{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px}
+.checkbox-box{width:18px;height:18px;border:2px solid #d1d5db;border-radius:4px;display:flex;align-items:center;justify-content:center;transition:all var(--transition);flex-shrink:0}
+.checkbox-box.checked{background:var(--blue);border-color:var(--blue)}
+.checkbox-box.checked::after{content:'✓';color:white;font-size:12px;font-weight:700}
+.radio-box{border-radius:50%}
+.radio-box.checked::after{content:'';width:8px;height:8px;background:white;border-radius:50%}
+
+/* MODAL */
+.modal-demo{background:var(--white);border-radius:var(--radius-xl);box-shadow:var(--shadow-xl);width:420px;max-width:100%;overflow:hidden}
+.modal-header{padding:20px 24px;border-bottom:1px solid var(--grey-light);display:flex;align-items:center;justify-content:space-between}
+.modal-header h3{font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--navy)}
+.modal-body{padding:24px}
+.modal-footer{padding:16px 24px;border-top:1px solid var(--grey-light);display:flex;justify-content:flex-end;gap:8px}
+
+/* TABS COMPONENT */
+.tab-bar{display:flex;border-bottom:2px solid var(--grey-light)}
+.tab-item{padding:10px 16px;font-size:13px;font-weight:600;color:var(--navy-50);cursor:pointer;position:relative;font-family:var(--font-display)}
+.tab-item.active{color:var(--blue)}
+.tab-item.active::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:2px;background:var(--blue)}
+
+/* PAGINATION */
+.pagination{display:flex;gap:4px}
+.page-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:1px solid #d1d5db;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;background:var(--white);color:var(--grey-dark);transition:all var(--transition)}
+.page-btn:hover{border-color:var(--blue);color:var(--blue)}
+.page-btn.active{background:var(--blue);color:var(--white);border-color:var(--blue)}
+
+/* DROPDOWN */
+.dropdown-demo{position:relative;display:inline-block}
+.dropdown-menu{background:var(--white);border:1px solid #e5e7eb;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);padding:4px;min-width:180px}
+.dropdown-item{padding:8px 12px;font-size:13px;border-radius:var(--radius-md);cursor:pointer;transition:background var(--transition);display:flex;align-items:center;gap:8px}
+.dropdown-item:hover{background:var(--blue-10);color:var(--blue)}
+.dropdown-divider{height:1px;background:var(--grey-light);margin:4px 0}
+
+/* STEPPER */
+.stepper{display:flex;align-items:center;gap:0}
+.step{display:flex;align-items:center;gap:8px}
+.step-circle{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:var(--font-display)}
+.step-circle.completed{background:var(--green);color:var(--white)}
+.step-circle.active{background:var(--blue);color:var(--white)}
+.step-circle.pending{background:var(--grey-light);color:var(--navy-50);border:2px solid #d1d5db}
+.step-label{font-size:12px;font-weight:500;color:var(--navy)}
+.step-line{flex:1;height:2px;background:var(--grey-light);margin:0 8px;min-width:24px}
+.step-line.completed{background:var(--green)}
+
+/* NOTIFICATION DOT */
+.notif-dot{width:8px;height:8px;border-radius:50%;background:var(--red);display:inline-block}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--grey-light);margin:16px 0}
+
+/* SIDEBAR SECTION */
+.sidebar-section{margin-bottom:24px}
+
+/* TOAST */
+.toast-demo{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);border-left:4px solid;font-size:13px}
+.toast-success{border-color:var(--green)}
+.toast-error{border-color:var(--red)}
+.toast-info{border-color:var(--blue)}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:48px 24px;color:var(--navy-50)}
+.empty-state svg{margin-bottom:16px;opacity:0.4}
+.empty-state h4{font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--navy);margin-bottom:8px}
+
+/* SELECT */
+.select{font-family:var(--font-body);font-size:14px;padding:10px 36px 10px 14px;border:1.5px solid #d1d5db;border-radius:var(--radius-md);background:var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23292627' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 12px center;appearance:none;cursor:pointer;outline:none;transition:all var(--transition)}
+.select:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-10)}
+
+/* TEXTAREA */
+.textarea{font-family:var(--font-body);font-size:14px;padding:10px 14px;border:1.5px solid #d1d5db;border-radius:var(--radius-md);background:var(--white);color:var(--grey-dark);outline:none;transition:all var(--transition);resize:vertical;min-height:80px;width:100%}
+.textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-10)}
+
+/* DO/DONT */
+.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:16px 0}
+.do-card,.dont-card{border-radius:var(--radius-lg);padding:20px;font-size:13px;line-height:1.6}
+.do-card{background:rgba(0,184,89,0.06);border:1px solid rgba(0,184,89,0.2)}
+.do-card h4{color:#047a3e;font-family:var(--font-display);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.dont-card{background:rgba(211,47,47,0.04);border:1px solid rgba(211,47,47,0.15)}
+.dont-card h4{color:var(--red);font-family:var(--font-display);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+
+/* MOBILE */
+@media(max-width:768px){
+  .ds-sidebar{transform:translateX(-100%)}
+  .ds-sidebar.open{transform:translateX(0)}
+  .ds-main{margin-left:0}
+  .ds-section{padding:24px 20px 60px}
+  .ds-grid-2,.ds-grid-3,.ds-grid-4,.ds-grid-5{grid-template-columns:1fr}
+  .do-dont{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<!-- SIDEBAR -->
+<div class="ds-layout">
+<aside class="ds-sidebar" id="sidebar">
+  <div class="ds-logo">
+    <svg viewBox="0 0 48 48" fill="none"><polygon points="12,36 24,12 28,20 20,20 32,36 24,28 20,28" fill="url(#lgr)"/><defs><linearGradient id="lgr" x1="12" y1="36" x2="32" y2="12"><stop offset="0%" stop-color="#001f3f"/><stop offset="100%" stop-color="#0074e4"/></linearGradient></defs></svg>
+    <div><div class="ds-logo-text">RGX ENGAGE</div><div class="ds-logo-sub">Design System v1.0</div></div>
+  </div>
+  <nav class="ds-nav">
+    <div class="ds-nav-section">
+      <span class="ds-nav-label">Overview</span>
+      <button class="ds-nav-link active" data-section="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Getting Started</button>
+      <button class="ds-nav-link" data-section="principles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Principles</button>
+    </div>
+    <div class="ds-nav-section">
+      <span class="ds-nav-label">Foundations</span>
+      <button class="ds-nav-link" data-section="colors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20"/></svg>Color System</button>
+      <button class="ds-nav-link" data-section="typography"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>Typography</button>
+      <button class="ds-nav-link" data-section="spacing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>Spacing &amp; Grid</button>
+      <button class="ds-nav-link" data-section="elevation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="16" height="12" rx="2"/><rect x="6" y="2" width="16" height="12" rx="2"/></svg>Elevation</button>
+    </div>
+    <div class="ds-nav-section">
+      <span class="ds-nav-label">Components</span>
+      <button class="ds-nav-link" data-section="buttons"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="8" rx="2"/></svg>Buttons</button>
+      <button class="ds-nav-link" data-section="inputs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h4"/></svg>Inputs</button>
+      <button class="ds-nav-link" data-section="selects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M15 12l-3 3-3-3"/></svg>Select &amp; Dropdown</button>
+      <button class="ds-nav-link" data-section="checkboxes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12l2 2 4-4"/></svg>Checkbox &amp; Radio</button>
+      <button class="ds-nav-link" data-section="toggles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="5" width="22" height="14" rx="7"/><circle cx="8" cy="12" r="4"/></svg>Toggle</button>
+      <button class="ds-nav-link" data-section="badges"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>Badges &amp; Tags</button>
+      <button class="ds-nav-link" data-section="avatars"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>Avatar</button>
+      <button class="ds-nav-link" data-section="alerts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>Alerts &amp; Toast</button>
+      <button class="ds-nav-link" data-section="cards"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 9h20"/></svg>Cards</button>
+      <button class="ds-nav-link" data-section="modals"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M3 9h6"/></svg>Modal &amp; Dialog</button>
+      <button class="ds-nav-link" data-section="tables"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>Table</button>
+      <button class="ds-nav-link" data-section="navigation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>Navigation</button>
+      <button class="ds-nav-link" data-section="tabs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M8 6V2"/></svg>Tabs</button>
+      <button class="ds-nav-link" data-section="pagination"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>Pagination</button>
+      <button class="ds-nav-link" data-section="progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83"/></svg>Progress &amp; Loading</button>
+      <button class="ds-nav-link" data-section="stepper"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="3"/><circle cx="19" cy="12" r="3"/><path d="M8 12h8"/></svg>Stepper</button>
+      <button class="ds-nav-link" data-section="tooltip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Tooltip</button>
+      <button class="ds-nav-link" data-section="breadcrumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>Breadcrumb</button>
+      <button class="ds-nav-link" data-section="divider"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18"/></svg>Divider</button>
+      <button class="ds-nav-link" data-section="emptystate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M7 17h10"/></svg>Empty State</button>
+      <button class="ds-nav-link" data-section="skeleton"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="4" rx="1"/><rect x="3" y="11" width="12" height="4" rx="1"/><rect x="3" y="19" width="8" height="2" rx="1"/></svg>Skeleton</button>
+    </div>
+    <div class="ds-nav-section">
+      <span class="ds-nav-label">Patterns</span>
+      <button class="ds-nav-link" data-section="forms"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10M7 12h6M7 17h8"/></svg>Form Patterns</button>
+      <button class="ds-nav-link" data-section="layouts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="18" height="7"/></svg>Layout Patterns</button>
+    </div>
+    <div class="ds-nav-section">
+      <span class="ds-nav-label">Resources</span>
+      <button class="ds-nav-link" data-section="tokens"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>Design Tokens</button>
+      <button class="ds-nav-link" data-section="accessibility"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Accessibility</button>
+      <button class="ds-nav-link" data-section="devguide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Dev Guide</button>
+    </div>
+  </nav>
+</aside>
+<!-- MAIN CONTENT -->
+<main class="ds-main">
+
+<!-- OVERVIEW -->
+<section class="ds-section active" id="overview">
+  <div class="ds-section-header">
+    <div class="ds-section-title">RGX Engage Design System</div>
+    <div class="ds-section-desc">A comprehensive design language for building information-enabled governance interfaces. Version 1.0 — Publish Ready.</div>
+  </div>
+  <div class="ds-grid ds-grid-3" style="margin-bottom:32px">
+    <div class="ds-card" style="border-top:3px solid var(--blue)">
+      <div class="ds-card-title">Foundations</div>
+      <p style="font-size:13px;color:var(--navy-70);line-height:1.6">Color system with 10 brand colors, 50+ semantic variants, dark mode support, and WCAG AA/AAA contrast compliance. 9-level type scale with responsive breakpoints. 8px spatial grid with 12-column layout system.</p>
+    </div>
+    <div class="ds-card" style="border-top:3px solid var(--purple)">
+      <div class="ds-card-title">Components</div>
+      <p style="font-size:13px;color:var(--navy-70);line-height:1.6">30+ production-ready components with interactive states, anatomy diagrams, accessibility specs, and code references. Each component includes default, hover, focus, active, disabled, and error states.</p>
+    </div>
+    <div class="ds-card" style="border-top:3px solid var(--green)">
+      <div class="ds-card-title">Resources</div>
+      <p style="font-size:13px;color:var(--navy-70);line-height:1.6">Design tokens in JSON format, pattern libraries for forms and layouts, accessibility guidelines, developer handoff documentation, and implementation principles with do's and don'ts.</p>
+    </div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-card-title">Brand Foundation</div>
+    <p style="font-size:13px;color:var(--navy-70);line-height:1.6;margin-bottom:16px">This system implements the RGX Engage visual identity: Strategic Navy and Flow Blue as primary brand expressions, Montserrat for display typography, Inter for body text, and a dual-service color architecture differentiating GaaS (Blue + Orange) from GPaaS (Purple + Green).</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <span class="badge badge-blue">IEEF.v2.1 Framework</span>
+      <span class="badge badge-green">GaaS Service Line</span>
+      <span class="badge badge-purple">GPaaS Platform Line</span>
+      <span class="badge badge-navy">WCAG 2.1 AA</span>
+      <span class="badge badge-orange">8px Grid System</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section class="ds-section" id="principles">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Design Principles</div>
+    <div class="ds-section-desc">Five guiding principles that shape every design decision across the RGX Engage ecosystem.</div>
+  </div>
+  <div class="ds-grid ds-grid-2">
+    <div class="ds-card" style="border-left:4px solid var(--blue)">
+      <div style="font-size:32px;font-family:var(--font-display);font-weight:800;color:var(--blue-30);margin-bottom:8px">01</div>
+      <div class="ds-card-title">Information Clarity</div>
+      <p style="font-size:13px;color:var(--navy-70);line-height:1.6">Every element must optimize information flow. Governance interfaces surface the right data at the right time—never overwhelming, always actionable. Visual hierarchy serves decision-making.</p>
+    </div>
+    <div class="ds-card" style="border-left:4px solid var(--purple)">
+      <div style="font-size:32px;font-family:var(--font-display);font-weight:800;color:rgba(108,92,231,0.3);margin-bottom:8px">02</div>
+      <div class="ds-card-title">Context Sensitivity</div>
+      <p style="font-size:13px;color:var(--navy-70);line-height:1.6">Components adapt to organizational maturity. A startup's dashboard differs from an enterprise's compliance view. The system provides variants that match the user's governance context.</p>
+    </div>
+    <div class="ds-card" style="border-left:4px solid var(--green)">
+      <div style="font-size:32px;font-family:var(--font-display);font-weight:800;color:rgba(0,184,89,0.3);margin-bottom:8px">03</div>
+      <div class="ds-card-title">Execution Focus</div>
+      <p style="font-size:13px;color:var(--navy-70);line-height:1.6">Every interaction leads toward action. Buttons have clear purpose, forms minimize friction, and feedback is immediate. The interface drives governance execution, not just observation.</p>
+    </div>
+    <div class="ds-card" style="border-left:4px solid var(--orange)">
+      <div style="font-size:32px;font-family:var(--font-display);font-weight:800;color:rgba(241,90,36,0.3);margin-bottom:8px">04</div>
+      <div class="ds-card-title">Human-Centered Governance</div>
+      <p style="font-size:13px;color:var(--navy-70);line-height:1.6">Governance frameworks work when people adopt them. Every component prioritizes usability, clear language, and progressive disclosure. Complex governance becomes approachable through thoughtful design.</p>
+    </div>
+    <div class="ds-card" style="border-left:4px solid var(--navy);grid-column:span 2">
+      <div style="font-size:32px;font-family:var(--font-display);font-weight:800;color:var(--navy-30);margin-bottom:8px">05</div>
+      <div class="ds-card-title">Systematic Consistency</div>
+      <p style="font-size:13px;color:var(--navy-70);line-height:1.6">Every pixel follows the 8px grid. Every color meets contrast ratios. Every component uses the same interaction patterns. Consistency builds trust—and trust is the foundation of governance. The system scales from a single assessment to an enterprise-wide platform without losing coherence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COLOR SYSTEM -->
+<section class="ds-section" id="colors">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Color System</div>
+    <div class="ds-section-desc">A comprehensive palette built for governance interfaces with service-specific color systems, semantic variants, dark mode support, and WCAG AA accessibility.</div>
+  </div>
+
+  <!-- Primary Colors -->
+  <div class="swatch-group">
+    <div class="swatch-group-title">Primary Brand Colors</div>
+    <div class="ds-grid ds-grid-5">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#001f3f"><span class="swatch-badge">Primary</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Strategic Navy</div>
+          <div class="swatch-hex" onclick="navigator.clipboard.writeText('#001f3f')">#001f3f</div>
+          <div class="swatch-meta">RGB 0, 31, 63 · Authority, trust</div>
+          <div class="swatch-wcag"><span class="wcag-pass">AA ✓ 16.6:1</span><span class="wcag-pass">AAA ✓</span></div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0074e4"><span class="swatch-badge">Primary</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Flow Blue</div>
+          <div class="swatch-hex" onclick="navigator.clipboard.writeText('#0074e4')">#0074e4</div>
+          <div class="swatch-meta">RGB 0, 116, 228 · Innovation</div>
+          <div class="swatch-wcag"><span class="wcag-pass">AA ✓ 4.6:1</span><span class="wcag-fail">AAA ✗</span></div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#292627"><span class="swatch-badge">Primary</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Context Grey</div>
+          <div class="swatch-hex" onclick="navigator.clipboard.writeText('#292627')">#292627</div>
+          <div class="swatch-meta">RGB 41, 38, 39 · Foundation</div>
+          <div class="swatch-wcag"><span class="wcag-pass">AA ✓ 14.7:1</span><span class="wcag-pass">AAA ✓</span></div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#F7F7F7;border-bottom:1px solid #e5e7eb"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Framework Grey</div>
+          <div class="swatch-hex" onclick="navigator.clipboard.writeText('#F7F7F7')">#F7F7F7</div>
+          <div class="swatch-meta">RGB 247, 247, 247 · Structure</div>
+          <div class="swatch-wcag"><span class="wcag-fail">On dark only</span></div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#ffffff;border-bottom:1px solid #e5e7eb"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Clarity White</div>
+          <div class="swatch-hex" onclick="navigator.clipboard.writeText('#ffffff')">#ffffff</div>
+          <div class="swatch-meta">RGB 255, 255, 255 · Transparency</div>
+          <div class="swatch-wcag"><span class="wcag-pass">On navy ✓</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Service Accents -->
+  <div class="swatch-group">
+    <div class="swatch-group-title">Service Accent Colors</div>
+    <div class="ds-grid ds-grid-5">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#f15a24"><span class="swatch-badge">GaaS</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Execution Orange</div>
+          <div class="swatch-hex" onclick="navigator.clipboard.writeText('#f15a24')">#f15a24</div>
+          <div class="swatch-meta">Action, implementation</div>
+          <div class="swatch-wcag"><span class="wcag-pass">AA Large ✓</span></div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#00b859"><span class="swatch-badge">GPaaS</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Growth Green</div>
+          <div class="swatch-hex" onclick="navigator.clipboard.writeText('#00b859')">#00b859</div>
+          <div class="swatch-meta">Progress, optimization</div>
+          <div class="swatch-wcag"><span class="wcag-pass">AA Large ✓</span></div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#6c5ce7"><span class="swatch-badge">GPaaS</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Intelligence Purple</div>
+          <div class="swatch-hex" onclick="navigator.clipboard.writeText('#6c5ce7')">#6c5ce7</div>
+          <div class="swatch-meta">Sophistication, insight</div>
+          <div class="swatch-wcag"><span class="wcag-pass">AA ✓ 4.6:1</span></div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#f8bf00"><span class="swatch-badge">Insight</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Clarity Yellow</div>
+          <div class="swatch-hex" onclick="navigator.clipboard.writeText('#f8bf00')">#f8bf00</div>
+          <div class="swatch-meta">Breakthrough, discovery</div>
+          <div class="swatch-wcag"><span class="wcag-fail">Dark text only</span></div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#d32f2f"><span class="swatch-badge">Alert</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Impact Red</div>
+          <div class="swatch-hex" onclick="navigator.clipboard.writeText('#d32f2f')">#d32f2f</div>
+          <div class="swatch-meta">Urgency, critical action</div>
+          <div class="swatch-wcag"><span class="wcag-pass">AA ✓ 5.6:1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Semantic Colors -->
+  <div class="swatch-group">
+    <div class="swatch-group-title">Semantic Color System</div>
+    <div class="ds-grid ds-grid-4">
+      <div class="ds-card">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><div style="width:12px;height:12px;border-radius:50%;background:var(--blue)"></div><strong style="font-size:13px">Interactive</strong></div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">Default</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">#0074e4</span></div>
+          <div style="height:28px;background:#0074e4;border-radius:4px"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">Hover</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">#005bb5</span></div>
+          <div style="height:28px;background:#005bb5;border-radius:4px"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">Active</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">#004a94</span></div>
+          <div style="height:28px;background:#004a94;border-radius:4px"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">Subtle BG</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">#e8f2fd</span></div>
+          <div style="height:28px;background:#e8f2fd;border-radius:4px;border:1px solid #d1d5db"></div>
+        </div>
+      </div>
+      <div class="ds-card">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><div style="width:12px;height:12px;border-radius:50%;background:var(--green)"></div><strong style="font-size:13px">Success</strong></div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">Default</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">#00b859</span></div>
+          <div style="height:28px;background:#00b859;border-radius:4px"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">Dark</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">#047a3e</span></div>
+          <div style="height:28px;background:#047a3e;border-radius:4px"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">Light</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">#dcfce7</span></div>
+          <div style="height:28px;background:#dcfce7;border-radius:4px;border:1px solid #d1d5db"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">Subtle BG</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">#f0fdf4</span></div>
+          <div style="height:28px;background:#f0fdf4;border-radius:4px;border:1px solid #d1d5db"></div>
+        </div>
+      </div>
+      <div class="ds-card">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><div style="width:12px;height:12px;border-radius:50%;background:var(--yellow)"></div><strong style="font-size:13px">Warning</strong></div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">Default</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">#f8bf00</span></div>
+          <div style="height:28px;background:#f8bf00;border-radius:4px"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">Dark</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">#6b5900</span></div>
+          <div style="height:28px;background:#6b5900;border-radius:4px"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">Light</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">#fef9c3</span></div>
+          <div style="height:28px;background:#fef9c3;border-radius:4px;border:1px solid #d1d5db"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">Subtle BG</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">#fffbeb</span></div>
+          <div style="height:28px;background:#fffbeb;border-radius:4px;border:1px solid #d1d5db"></div>
+        </div>
+      </div>
+      <div class="ds-card">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><div style="width:12px;height:12px;border-radius:50%;background:var(--red)"></div><strong style="font-size:13px">Error / Danger</strong></div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">Default</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">#d32f2f</span></div>
+          <div style="height:28px;background:#d32f2f;border-radius:4px"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">Dark</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">#7f1d1d</span></div>
+          <div style="height:28px;background:#7f1d1d;border-radius:4px"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">Light</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">#fecaca</span></div>
+          <div style="height:28px;background:#fecaca;border-radius:4px;border:1px solid #d1d5db"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">Subtle BG</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">#fef2f2</span></div>
+          <div style="height:28px;background:#fef2f2;border-radius:4px;border:1px solid #d1d5db"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dark Mode -->
+  <div class="swatch-group">
+    <div class="swatch-group-title">Dark Mode Palette</div>
+    <div class="ds-card" style="background:var(--navy);color:var(--white)">
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px">
+        <div><div style="height:48px;background:#0a1628;border-radius:6px;margin-bottom:6px;border:1px solid rgba(255,255,255,0.1)"></div><div style="font-size:11px;font-weight:600">Surface</div><div style="font-family:var(--font-mono);font-size:10px;opacity:0.5">#0a1628</div></div>
+        <div><div style="height:48px;background:#0f2440;border-radius:6px;margin-bottom:6px;border:1px solid rgba(255,255,255,0.1)"></div><div style="font-size:11px;font-weight:600">Card</div><div style="font-family:var(--font-mono);font-size:10px;opacity:0.5">#0f2440</div></div>
+        <div><div style="height:48px;background:#163358;border-radius:6px;margin-bottom:6px;border:1px solid rgba(255,255,255,0.1)"></div><div style="font-size:11px;font-weight:600">Elevated</div><div style="font-family:var(--font-mono);font-size:10px;opacity:0.5">#163358</div></div>
+        <div><div style="height:48px;background:#2196f3;border-radius:6px;margin-bottom:6px"></div><div style="font-size:11px;font-weight:600">Primary</div><div style="font-family:var(--font-mono);font-size:10px;opacity:0.5">#2196f3</div></div>
+        <div><div style="height:48px;background:rgba(255,255,255,0.87);border-radius:6px;margin-bottom:6px"></div><div style="font-size:11px;font-weight:600">Text</div><div style="font-family:var(--font-mono);font-size:10px;opacity:0.5">rgba(255,255,255,0.87)</div></div>
+      </div>
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1)">
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px">
+          <div><div style="height:48px;background:rgba(255,255,255,0.6);border-radius:6px;margin-bottom:6px"></div><div style="font-size:11px;font-weight:600">Secondary Text</div><div style="font-family:var(--font-mono);font-size:10px;opacity:0.5">rgba(w,0.6)</div></div>
+          <div><div style="height:48px;background:rgba(255,255,255,0.12);border-radius:6px;margin-bottom:6px;border:1px solid rgba(255,255,255,0.1)"></div><div style="font-size:11px;font-weight:600">Border</div><div style="font-family:var(--font-mono);font-size:10px;opacity:0.5">rgba(w,0.12)</div></div>
+          <div><div style="height:48px;background:#4caf50;border-radius:6px;margin-bottom:6px"></div><div style="font-size:11px;font-weight:600">Success</div><div style="font-family:var(--font-mono);font-size:10px;opacity:0.5">#4caf50</div></div>
+          <div><div style="height:48px;background:#ffb74d;border-radius:6px;margin-bottom:6px"></div><div style="font-size:11px;font-weight:600">Warning</div><div style="font-family:var(--font-mono);font-size:10px;opacity:0.5">#ffb74d</div></div>
+          <div><div style="height:48px;background:#ef5350;border-radius:6px;margin-bottom:6px"></div><div style="font-size:11px;font-weight:600">Error</div><div style="font-family:var(--font-mono);font-size:10px;opacity:0.5">#ef5350</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Service Color Systems -->
+  <div class="swatch-group">
+    <div class="swatch-group-title">Service Color Systems</div>
+    <div class="ds-grid ds-grid-2">
+      <div class="ds-card" style="border-top:3px solid var(--blue)">
+        <div class="ds-card-title" style="display:flex;align-items:center;gap:8px">GaaS <span class="badge badge-blue">Consulting</span></div>
+        <p style="font-size:12px;color:var(--navy-70);margin-bottom:12px">Flow Blue + Execution Orange — Action-oriented, energetic</p>
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <div style="flex:2;height:48px;background:#0074e4;border-radius:6px;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:600">Primary</div>
+          <div style="flex:1;height:48px;background:#f15a24;border-radius:6px;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:600">Accent</div>
+          <div style="flex:1;height:48px;background:#001f3f;border-radius:6px;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:600">Dark</div>
+        </div>
+        <div style="font-size:11px;color:var(--navy-50)">Use: Service pages, consulting deliverables, GaaS marketing materials, assessment reports</div>
+      </div>
+      <div class="ds-card" style="border-top:3px solid var(--purple)">
+        <div class="ds-card-title" style="display:flex;align-items:center;gap:8px">GPaaS <span class="badge badge-purple">Platform</span></div>
+        <p style="font-size:12px;color:var(--navy-70);margin-bottom:12px">Intelligence Purple + Growth Green — Tech-forward, sophisticated</p>
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <div style="flex:2;height:48px;background:#6c5ce7;border-radius:6px;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:600">Primary</div>
+          <div style="flex:1;height:48px;background:#00b859;border-radius:6px;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:600">Accent</div>
+          <div style="flex:1;height:48px;background:#001f3f;border-radius:6px;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:600">Dark</div>
+        </div>
+        <div style="font-size:11px;color:var(--navy-50)">Use: Platform UI, dashboards, GPaaS marketing, tech documentation, product features</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contrast Table -->
+  <div class="swatch-group">
+    <div class="swatch-group-title">Contrast Ratios &amp; Accessibility</div>
+    <div class="ds-card" style="overflow-x:auto">
+      <table class="ds-table">
+        <thead>
+          <tr><th>Combination</th><th>Ratio</th><th>Normal Text</th><th>Large Text</th><th>UI Elements</th><th>Usage</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Navy on White</td><td style="font-family:var(--font-mono)">16.6:1</td><td><span class="wcag-pass">AAA ✓</span></td><td><span class="wcag-pass">AAA ✓</span></td><td><span class="wcag-pass">✓</span></td><td>Headlines, body text</td></tr>
+          <tr><td>White on Navy</td><td style="font-family:var(--font-mono)">16.6:1</td><td><span class="wcag-pass">AAA ✓</span></td><td><span class="wcag-pass">AAA ✓</span></td><td><span class="wcag-pass">✓</span></td><td>Hero sections, nav</td></tr>
+          <tr><td>Blue on White</td><td style="font-family:var(--font-mono)">4.6:1</td><td><span class="wcag-pass">AA ✓</span></td><td><span class="wcag-pass">AA ✓</span></td><td><span class="wcag-pass">✓</span></td><td>Links, interactive</td></tr>
+          <tr><td>Grey on White</td><td style="font-family:var(--font-mono)">14.7:1</td><td><span class="wcag-pass">AAA ✓</span></td><td><span class="wcag-pass">AAA ✓</span></td><td><span class="wcag-pass">✓</span></td><td>Body text</td></tr>
+          <tr><td>Purple on White</td><td style="font-family:var(--font-mono)">4.6:1</td><td><span class="wcag-pass">AA ✓</span></td><td><span class="wcag-pass">AA ✓</span></td><td><span class="wcag-pass">✓</span></td><td>GPaaS accents</td></tr>
+          <tr><td>Red on White</td><td style="font-family:var(--font-mono)">5.6:1</td><td><span class="wcag-pass">AA ✓</span></td><td><span class="wcag-pass">AAA ✓</span></td><td><span class="wcag-pass">✓</span></td><td>Errors, alerts</td></tr>
+          <tr><td>Orange on White</td><td style="font-family:var(--font-mono)">3.2:1</td><td><span class="wcag-fail">AA ✗</span></td><td><span class="wcag-pass">AA ✓</span></td><td><span class="wcag-pass">✓</span></td><td>Large text & icons only</td></tr>
+          <tr><td>Green on White</td><td style="font-family:var(--font-mono)">3.1:1</td><td><span class="wcag-fail">AA ✗</span></td><td><span class="wcag-pass">AA ✓</span></td><td><span class="wcag-pass">✓</span></td><td>Large text & icons only</td></tr>
+          <tr><td>Yellow on Navy</td><td style="font-family:var(--font-mono)">10.8:1</td><td><span class="wcag-pass">AAA ✓</span></td><td><span class="wcag-pass">AAA ✓</span></td><td><span class="wcag-pass">✓</span></td><td>Highlights on dark</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Color Do's and Don'ts -->
+  <div class="do-dont">
+    <div class="do-card">
+      <h4>✓ Do</h4>
+      <p>Use exact hex values from the palette. Maintain GaaS/GPaaS service differentiation. Use Strategic Navy for primary backgrounds. Limit to 2–3 colors per composition. Test all combinations for WCAG AA contrast. Use the 60-30-10 rule: 60% neutrals, 30% brand, 10% accent.</p>
+    </div>
+    <div class="dont-card">
+      <h4>✗ Don't</h4>
+      <p>Mix GaaS colors (Blue+Orange) with GPaaS colors (Purple+Green). Use colors outside the defined palette. Use pure black (#000000)—use Context Grey instead. Place Yellow or Red as full backgrounds. Use Orange or Green for body text (insufficient contrast). Rely on color alone to convey information.</p>
+    </div>
+  </div>
+</section>
+<!-- TYPOGRAPHY -->
+<section class="ds-section" id="typography">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Typography</div>
+    <div class="ds-section-desc">A 9-level type scale using Montserrat for display/headings and Inter for body/UI text. JetBrains Mono for code. All sizes follow a 1.25 modular scale with responsive breakpoints.</div>
+  </div>
+
+  <div class="ds-card">
+    <div class="ds-card-title">Type Scale — 9 Levels</div>
+    <div class="type-sample">
+      <div class="type-label"><span class="type-tag">Display</span><span class="type-specs">Montserrat 800 · 48/52 · -0.02em · Desktop: 48px / Tablet: 40px / Mobile: 32px</span></div>
+      <div class="type-preview" style="font-family:var(--font-display);font-weight:800;font-size:48px;letter-spacing:-0.02em;line-height:1.08;color:var(--navy)">Information Governance</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-label"><span class="type-tag">H1</span><span class="type-specs">Montserrat 800 · 36/40 · -0.02em · Desktop: 36px / Tablet: 32px / Mobile: 28px</span></div>
+      <div class="type-preview" style="font-family:var(--font-display);font-weight:800;font-size:36px;letter-spacing:-0.02em;line-height:1.11;color:var(--navy)">Strategic Framework</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-label"><span class="type-tag">H2</span><span class="type-specs">Montserrat 700 · 30/36 · -0.01em · Desktop: 30px / Tablet: 26px / Mobile: 24px</span></div>
+      <div class="type-preview" style="font-family:var(--font-display);font-weight:700;font-size:30px;letter-spacing:-0.01em;line-height:1.2;color:var(--navy)">Governance Excellence</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-label"><span class="type-tag">H3</span><span class="type-specs">Montserrat 700 · 24/30 · 0 · Desktop: 24px / Tablet: 22px / Mobile: 20px</span></div>
+      <div class="type-preview" style="font-family:var(--font-display);font-weight:700;font-size:24px;line-height:1.25;color:var(--navy)">Context-Appropriate Scaling</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-label"><span class="type-tag">H4</span><span class="type-specs">Montserrat 600 · 20/28 · 0 · Desktop: 20px / Tablet: 18px / Mobile: 18px</span></div>
+      <div class="type-preview" style="font-family:var(--font-display);font-weight:600;font-size:20px;line-height:1.4;color:var(--navy)">IEEF.v2.1 Methodology</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-label"><span class="type-tag">H5</span><span class="type-specs">Montserrat 600 · 18/26 · 0 · All breakpoints: 18px</span></div>
+      <div class="type-preview" style="font-family:var(--font-display);font-weight:600;font-size:18px;line-height:1.44;color:var(--navy)">Execution-First Implementation</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-label"><span class="type-tag">Body</span><span class="type-specs">Inter 400 · 16/24 · 0 · All breakpoints: 16px · Line height: 1.5</span></div>
+      <div class="type-preview" style="font-family:var(--font-body);font-weight:400;font-size:16px;line-height:1.5;color:var(--grey-dark);max-width:640px">We deliver information-enabled governance that scales with your business—optimizing decision-making, accelerating growth, and evolving with your organizational maturity.</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-label"><span class="type-tag">Small</span><span class="type-specs">Inter 400 · 14/20 · 0 · All breakpoints: 14px</span></div>
+      <div class="type-preview" style="font-family:var(--font-body);font-weight:400;font-size:14px;line-height:1.43;color:var(--navy-70)">Supporting text for descriptions, captions, and secondary content elements.</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-label"><span class="type-tag">Caption</span><span class="type-specs">Inter 500 · 12/16 · 0.01em · All breakpoints: 12px</span></div>
+      <div class="type-preview" style="font-family:var(--font-body);font-weight:500;font-size:12px;line-height:1.33;letter-spacing:0.01em;color:var(--navy-50)">LAST UPDATED · MARCH 2026 · VERSION 1.0</div>
+    </div>
+  </div>
+
+  <div class="ds-grid ds-grid-2" style="margin-top:24px">
+    <div class="ds-card">
+      <div class="ds-card-title">Font Stacks</div>
+      <div style="margin-bottom:16px">
+        <div style="font-family:var(--font-display);font-weight:700;font-size:14px;margin-bottom:4px">Montserrat</div>
+        <div style="font-size:12px;color:var(--navy-50);margin-bottom:4px">Display · Headlines · UI Labels · CTAs</div>
+        <div class="code-block" style="font-size:11px;padding:10px 14px">font-family: 'Montserrat', system-ui, sans-serif;</div>
+      </div>
+      <div style="margin-bottom:16px">
+        <div style="font-family:var(--font-body);font-weight:600;font-size:14px;margin-bottom:4px">Inter</div>
+        <div style="font-size:12px;color:var(--navy-50);margin-bottom:4px">Body · Paragraphs · Inputs · Platform UI</div>
+        <div class="code-block" style="font-size:11px;padding:10px 14px">font-family: 'Inter', system-ui, sans-serif;</div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-mono);font-weight:500;font-size:14px;margin-bottom:4px">JetBrains Mono</div>
+        <div style="font-size:12px;color:var(--navy-50);margin-bottom:4px">Code · Tokens · Technical values</div>
+        <div class="code-block" style="font-size:11px;padding:10px 14px">font-family: 'JetBrains Mono', monospace;</div>
+      </div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-card-title">Accessibility Notes</div>
+      <div style="font-size:13px;color:var(--navy-70);line-height:1.7">
+        <p style="margin-bottom:12px"><strong>Minimum body size:</strong> 16px (1rem) ensures readability for all users. Never set body text below 14px.</p>
+        <p style="margin-bottom:12px"><strong>Line height:</strong> Body text uses 1.5× for optimal readability. Headings use tighter leading (1.1–1.25×) to maintain visual cohesion.</p>
+        <p style="margin-bottom:12px"><strong>Line length:</strong> Aim for 60–75 characters per line (max-width: 640px at 16px body). Exceeding 80 characters degrades readability.</p>
+        <p style="margin-bottom:12px"><strong>Letter spacing:</strong> Display text uses -0.02em for visual tightness. Caption text uses +0.01em for legibility at small sizes.</p>
+        <p><strong>Responsive:</strong> Display and H1–H3 scale down at tablet (≤1024px) and mobile (≤640px) breakpoints. Body and below remain constant.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPACING & GRID -->
+<section class="ds-section" id="spacing">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Spacing &amp; Grid</div>
+    <div class="ds-section-desc">An 8px base grid with 12 spatial tokens. A responsive 12-column grid system for layout consistency across all governance interfaces.</div>
+  </div>
+
+  <div class="ds-grid ds-grid-2">
+    <div class="ds-card">
+      <div class="ds-card-title">8px Spacing Scale</div>
+      <div class="spacing-row"><span class="spacing-token">sp-1</span><span class="spacing-value">4px</span><div class="spacing-visual"><div class="spacing-bar" style="width:4px"></div></div></div>
+      <div class="spacing-row"><span class="spacing-token">sp-2</span><span class="spacing-value">8px</span><div class="spacing-visual"><div class="spacing-bar" style="width:8px"></div></div></div>
+      <div class="spacing-row"><span class="spacing-token">sp-3</span><span class="spacing-value">12px</span><div class="spacing-visual"><div class="spacing-bar" style="width:12px"></div></div></div>
+      <div class="spacing-row"><span class="spacing-token">sp-4</span><span class="spacing-value">16px</span><div class="spacing-visual"><div class="spacing-bar" style="width:16px"></div></div></div>
+      <div class="spacing-row"><span class="spacing-token">sp-5</span><span class="spacing-value">20px</span><div class="spacing-visual"><div class="spacing-bar" style="width:20px"></div></div></div>
+      <div class="spacing-row"><span class="spacing-token">sp-6</span><span class="spacing-value">24px</span><div class="spacing-visual"><div class="spacing-bar" style="width:24px"></div></div></div>
+      <div class="spacing-row"><span class="spacing-token">sp-8</span><span class="spacing-value">32px</span><div class="spacing-visual"><div class="spacing-bar" style="width:32px"></div></div></div>
+      <div class="spacing-row"><span class="spacing-token">sp-10</span><span class="spacing-value">40px</span><div class="spacing-visual"><div class="spacing-bar" style="width:40px"></div></div></div>
+      <div class="spacing-row"><span class="spacing-token">sp-12</span><span class="spacing-value">48px</span><div class="spacing-visual"><div class="spacing-bar" style="width:48px"></div></div></div>
+      <div class="spacing-row"><span class="spacing-token">sp-16</span><span class="spacing-value">64px</span><div class="spacing-visual"><div class="spacing-bar" style="width:64px"></div></div></div>
+      <div class="spacing-row"><span class="spacing-token">sp-20</span><span class="spacing-value">80px</span><div class="spacing-visual"><div class="spacing-bar" style="width:80px"></div></div></div>
+      <div class="spacing-row"><span class="spacing-token">sp-24</span><span class="spacing-value">96px</span><div class="spacing-visual"><div class="spacing-bar" style="width:96px"></div></div></div>
+    </div>
+
+    <div class="ds-card">
+      <div class="ds-card-title">12-Column Grid</div>
+      <div style="margin-bottom:16px">
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:8px;margin-bottom:8px">
+          <div style="grid-column:span 12;height:28px;background:var(--blue-10);border:1px solid var(--blue-30);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--blue)">12 cols</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:8px;margin-bottom:8px">
+          <div style="grid-column:span 6;height:28px;background:var(--blue-10);border:1px solid var(--blue-30);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--blue)">6</div>
+          <div style="grid-column:span 6;height:28px;background:var(--blue-10);border:1px solid var(--blue-30);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--blue)">6</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:8px;margin-bottom:8px">
+          <div style="grid-column:span 4;height:28px;background:var(--blue-10);border:1px solid var(--blue-30);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--blue)">4</div>
+          <div style="grid-column:span 4;height:28px;background:var(--blue-10);border:1px solid var(--blue-30);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--blue)">4</div>
+          <div style="grid-column:span 4;height:28px;background:var(--blue-10);border:1px solid var(--blue-30);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--blue)">4</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:8px;margin-bottom:8px">
+          <div style="grid-column:span 3;height:28px;background:var(--blue-10);border:1px solid var(--blue-30);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--blue)">3</div>
+          <div style="grid-column:span 3;height:28px;background:var(--blue-10);border:1px solid var(--blue-30);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--blue)">3</div>
+          <div style="grid-column:span 3;height:28px;background:var(--blue-10);border:1px solid var(--blue-30);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--blue)">3</div>
+          <div style="grid-column:span 3;height:28px;background:var(--blue-10);border:1px solid var(--blue-30);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--blue)">3</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:8px;margin-bottom:8px">
+          <div style="grid-column:span 8;height:28px;background:var(--blue-10);border:1px solid var(--blue-30);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--blue)">8 — Content</div>
+          <div style="grid-column:span 4;height:28px;background:rgba(108,92,231,0.1);border:1px solid rgba(108,92,231,0.3);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--purple)">4 — Sidebar</div>
+        </div>
+      </div>
+      <table class="comp-spec-table" style="margin-top:16px">
+        <tr><th>Breakpoint</th><th>Width</th><th>Columns</th><th>Gutter</th><th>Margin</th></tr>
+        <tr><td>Mobile</td><td><code>&lt;640px</code></td><td>4</td><td>16px</td><td>16px</td></tr>
+        <tr><td>Tablet</td><td><code>640–1024px</code></td><td>8</td><td>24px</td><td>24px</td></tr>
+        <tr><td>Desktop</td><td><code>1024–1440px</code></td><td>12</td><td>24px</td><td>48px</td></tr>
+        <tr><td>Wide</td><td><code>&gt;1440px</code></td><td>12</td><td>32px</td><td>auto</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ELEVATION -->
+<section class="ds-section" id="elevation">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Elevation &amp; Depth</div>
+    <div class="ds-section-desc">Shadow tokens and border-radius values that establish visual hierarchy through depth perception.</div>
+  </div>
+  <div class="ds-grid ds-grid-5" style="margin-bottom:32px">
+    <div class="ds-card" style="text-align:center;box-shadow:var(--shadow-xs)"><div style="font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px">XS</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">shadow-xs</div><div style="font-size:10px;color:var(--navy-50);margin-top:4px">Subtle elements</div></div>
+    <div class="ds-card" style="text-align:center;box-shadow:var(--shadow-sm)"><div style="font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px">SM</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">shadow-sm</div><div style="font-size:10px;color:var(--navy-50);margin-top:4px">Cards, inputs</div></div>
+    <div class="ds-card" style="text-align:center;box-shadow:var(--shadow-md)"><div style="font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px">MD</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">shadow-md</div><div style="font-size:10px;color:var(--navy-50);margin-top:4px">Dropdowns, hover</div></div>
+    <div class="ds-card" style="text-align:center;box-shadow:var(--shadow-lg)"><div style="font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px">LG</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">shadow-lg</div><div style="font-size:10px;color:var(--navy-50);margin-top:4px">Tooltips, popovers</div></div>
+    <div class="ds-card" style="text-align:center;box-shadow:var(--shadow-xl)"><div style="font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px">XL</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">shadow-xl</div><div style="font-size:10px;color:var(--navy-50);margin-top:4px">Modals, dialogs</div></div>
+  </div>
+  <div class="ds-grid ds-grid-4">
+    <div class="ds-card" style="text-align:center"><div style="width:48px;height:48px;background:var(--blue-10);border-radius:var(--radius-sm);margin:0 auto 8px"></div><div style="font-size:12px;font-weight:600">SM — 4px</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">Badges, chips</div></div>
+    <div class="ds-card" style="text-align:center"><div style="width:48px;height:48px;background:var(--blue-10);border-radius:var(--radius-md);margin:0 auto 8px"></div><div style="font-size:12px;font-weight:600">MD — 6px</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">Buttons, inputs</div></div>
+    <div class="ds-card" style="text-align:center"><div style="width:48px;height:48px;background:var(--blue-10);border-radius:var(--radius-lg);margin:0 auto 8px"></div><div style="font-size:12px;font-weight:600">LG — 8px</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">Cards, panels</div></div>
+    <div class="ds-card" style="text-align:center"><div style="width:48px;height:48px;background:var(--blue-10);border-radius:var(--radius-xl);margin:0 auto 8px"></div><div style="font-size:12px;font-weight:600">XL — 12px</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--navy-50)">Modals, sections</div></div>
+  </div>
+</section>
+<!-- BUTTONS -->
+<section class="ds-section" id="buttons">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Buttons</div>
+    <div class="ds-section-desc">Primary, secondary, ghost, and danger variants with three sizes and all interactive states.</div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-card-title">Variants</div>
+    <div class="comp-preview">
+      <button class="btn btn-primary">Primary Action</button>
+      <button class="btn btn-secondary">Secondary</button>
+      <button class="btn btn-ghost">Ghost</button>
+      <button class="btn btn-danger">Danger</button>
+    </div>
+    <div class="ds-card-title" style="margin-top:16px">Sizes</div>
+    <div class="comp-preview">
+      <button class="btn btn-primary btn-sm">Small</button>
+      <button class="btn btn-primary">Default</button>
+      <button class="btn btn-primary btn-lg">Large</button>
+      <button class="btn btn-primary btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+    </div>
+    <div class="ds-card-title" style="margin-top:16px">States</div>
+    <div class="comp-preview">
+      <button class="btn btn-primary">Default</button>
+      <button class="btn btn-primary" style="background:#005bb5">Hover</button>
+      <button class="btn btn-primary" style="outline:2px solid var(--blue);outline-offset:2px">Focus</button>
+      <button class="btn btn-primary" style="transform:scale(0.98)">Active</button>
+      <button class="btn btn-primary disabled">Disabled</button>
+    </div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-card-title">Specs</div>
+    <table class="comp-spec-table">
+      <tr><th>Property</th><th>Small</th><th>Default</th><th>Large</th></tr>
+      <tr><td>Height</td><td><code>32px</code></td><td><code>40px</code></td><td><code>48px</code></td></tr>
+      <tr><td>Padding</td><td><code>6px 14px</code></td><td><code>10px 20px</code></td><td><code>14px 28px</code></td></tr>
+      <tr><td>Font Size</td><td><code>12px</code></td><td><code>14px</code></td><td><code>16px</code></td></tr>
+      <tr><td>Font</td><td colspan="3"><code>Montserrat 600</code></td></tr>
+      <tr><td>Border Radius</td><td colspan="3"><code>6px (radius-md)</code></td></tr>
+      <tr><td>Transition</td><td colspan="3"><code>all 150ms ease</code></td></tr>
+      <tr><td>Focus Ring</td><td colspan="3"><code>2px solid blue, offset 2px</code></td></tr>
+    </table>
+  </div>
+  <div class="ds-card">
+    <div class="ds-card-title">Accessibility</div>
+    <div style="font-size:13px;color:var(--navy-70);line-height:1.6">All buttons use <code>role="button"</code> natively. Focus indicator is a 2px blue outline at 2px offset visible in all modes. Disabled buttons set <code>aria-disabled="true"</code> and remove from tab order. Minimum touch target: 44×44px (buttons smaller than this get padding). Color contrast meets WCAG AA: primary white-on-blue at 4.6:1, danger white-on-red at 5.6:1.</div>
+  </div>
+</section>
+
+<!-- INPUTS -->
+<section class="ds-section" id="inputs">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Inputs</div>
+    <div class="ds-section-desc">Text inputs, textareas, and form field patterns with validation states and helper text.</div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-card-title">States</div>
+    <div class="ds-grid ds-grid-2" style="margin-top:12px">
+      <div>
+        <label style="font-size:12px;font-weight:600;color:var(--navy);display:block;margin-bottom:4px">Default</label>
+        <input class="input" type="text" placeholder="Enter governance scope...">
+      </div>
+      <div>
+        <label style="font-size:12px;font-weight:600;color:var(--navy);display:block;margin-bottom:4px">Focus</label>
+        <input class="input" type="text" value="IEEF.v2.1 Assessment" style="border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-10)">
+      </div>
+      <div>
+        <label style="font-size:12px;font-weight:600;color:var(--red);display:block;margin-bottom:4px">Error</label>
+        <input class="input error" type="text" value="Invalid input">
+        <div style="font-size:11px;color:var(--red);margin-top:4px">Please enter a valid framework reference</div>
+      </div>
+      <div>
+        <label style="font-size:12px;font-weight:600;color:var(--navy-50);display:block;margin-bottom:4px">Disabled</label>
+        <input class="input disabled" type="text" value="Read-only value" disabled>
+      </div>
+    </div>
+    <div style="margin-top:20px">
+      <label style="font-size:12px;font-weight:600;color:var(--navy);display:block;margin-bottom:4px">Textarea</label>
+      <textarea class="textarea" placeholder="Describe the governance assessment scope and objectives..."></textarea>
+    </div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-card-title">Specs</div>
+    <table class="comp-spec-table">
+      <tr><td>Height</td><td><code>40px</code> (input) / auto (textarea, min 80px)</td></tr>
+      <tr><td>Padding</td><td><code>10px 14px</code></td></tr>
+      <tr><td>Font</td><td><code>Inter 400, 14px</code></td></tr>
+      <tr><td>Border</td><td><code>1.5px solid #d1d5db</code> → hover: <code>#9ca3af</code> → focus: <code>#0074e4</code></td></tr>
+      <tr><td>Focus Ring</td><td><code>0 0 0 3px rgba(0,116,228,0.1)</code></td></tr>
+      <tr><td>Error</td><td>Border: <code>#d32f2f</code>, ring: <code>rgba(211,47,47,0.1)</code></td></tr>
+      <tr><td>ARIA</td><td><code>aria-invalid="true"</code> for error, <code>aria-describedby</code> for helper text</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- SELECT & DROPDOWN -->
+<section class="ds-section" id="selects">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Select &amp; Dropdown</div>
+    <div class="ds-section-desc">Native select elements and custom dropdown menus for option selection.</div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-card-title">Select Input</div>
+    <div class="comp-preview" style="justify-content:flex-start">
+      <div style="width:280px">
+        <label style="font-size:12px;font-weight:600;color:var(--navy);display:block;margin-bottom:4px">Governance Level</label>
+        <select class="select" style="width:100%"><option>Team Context</option><option>Team of Teams</option><option>Enterprise</option></select>
+      </div>
+    </div>
+    <div class="ds-card-title" style="margin-top:20px">Dropdown Menu</div>
+    <div class="comp-preview" style="justify-content:flex-start">
+      <div class="dropdown-menu">
+        <div class="dropdown-item" style="background:var(--blue-10);color:var(--blue)">Dashboard</div>
+        <div class="dropdown-item">Assessments</div>
+        <div class="dropdown-item">Reports</div>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-item" style="color:var(--red)">Delete</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKBOX & RADIO -->
+<section class="ds-section" id="checkboxes">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Checkbox &amp; Radio</div>
+    <div class="ds-section-desc">Selection controls for single and multiple options.</div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-grid ds-grid-2">
+      <div>
+        <div class="ds-card-title">Checkbox</div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
+          <label class="checkbox-demo"><span class="checkbox-box checked"></span>Information Strategy</label>
+          <label class="checkbox-demo"><span class="checkbox-box checked"></span>Governance Framework</label>
+          <label class="checkbox-demo"><span class="checkbox-box"></span>Risk Assessment</label>
+          <label class="checkbox-demo" style="opacity:0.5"><span class="checkbox-box" style="background:var(--grey-light)"></span>Locked Option</label>
+        </div>
+      </div>
+      <div>
+        <div class="ds-card-title">Radio</div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
+          <label class="checkbox-demo"><span class="checkbox-box radio-box checked"></span>GaaS — Consulting</label>
+          <label class="checkbox-demo"><span class="checkbox-box radio-box"></span>GPaaS — Platform</label>
+          <label class="checkbox-demo"><span class="checkbox-box radio-box"></span>Combined</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-card-title">Specs</div>
+    <table class="comp-spec-table">
+      <tr><td>Size</td><td><code>18×18px</code>, border <code>2px solid #d1d5db</code></td></tr>
+      <tr><td>Checked</td><td>Fill: <code>#0074e4</code>, border: <code>#0074e4</code></td></tr>
+      <tr><td>Gap</td><td><code>8px</code> between control and label</td></tr>
+      <tr><td>Focus</td><td><code>2px outline #0074e4</code> at <code>2px</code> offset</td></tr>
+      <tr><td>ARIA</td><td><code>role="checkbox"</code>/<code>role="radio"</code> with <code>aria-checked</code></td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- TOGGLE -->
+<section class="ds-section" id="toggles">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Toggle Switch</div>
+    <div class="ds-section-desc">Binary on/off controls for settings and preferences.</div>
+  </div>
+  <div class="ds-card">
+    <div class="comp-preview" style="gap:24px">
+      <div style="display:flex;align-items:center;gap:10px"><button class="toggle on"></button><span style="font-size:13px">Continuous monitoring</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><button class="toggle"></button><span style="font-size:13px">Email notifications</span></div>
+      <div style="display:flex;align-items:center;gap:10px;opacity:0.5"><button class="toggle on" disabled></button><span style="font-size:13px">Enforced policy</span></div>
+    </div>
+  </div>
+  <div class="ds-card"><div class="ds-card-title">Specs</div><table class="comp-spec-table">
+    <tr><td>Track</td><td><code>44×24px</code>, radius <code>12px</code></td></tr>
+    <tr><td>Thumb</td><td><code>20×20px</code>, white, shadow-sm</td></tr>
+    <tr><td>Off</td><td>Track: <code>#d1d5db</code></td></tr>
+    <tr><td>On</td><td>Track: <code>#0074e4</code>, thumb slides <code>20px</code></td></tr>
+    <tr><td>ARIA</td><td><code>role="switch"</code> with <code>aria-checked</code></td></tr>
+  </table></div>
+</section>
+
+<!-- BADGES -->
+<section class="ds-section" id="badges">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Badges &amp; Tags</div>
+    <div class="ds-section-desc">Status indicators, labels, and interactive chip/tag components.</div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-card-title">Badges</div>
+    <div class="comp-preview">
+      <span class="badge badge-blue">Active</span>
+      <span class="badge badge-green">Compliant</span>
+      <span class="badge badge-orange">In Review</span>
+      <span class="badge badge-red">Critical</span>
+      <span class="badge badge-purple">Platform</span>
+      <span class="badge badge-navy">Enterprise</span>
+    </div>
+    <div class="ds-card-title" style="margin-top:16px">Chips / Tags</div>
+    <div class="comp-preview">
+      <span class="chip">Governance</span>
+      <span class="chip selected">IEEF.v2.1</span>
+      <span class="chip">Risk <span class="chip-remove">×</span></span>
+      <span class="chip">Compliance <span class="chip-remove">×</span></span>
+    </div>
+  </div>
+  <div class="ds-card"><div class="ds-card-title">Specs</div><table class="comp-spec-table">
+    <tr><td>Badge padding</td><td><code>3px 8px</code>, radius <code>999px</code></td></tr>
+    <tr><td>Badge font</td><td><code>Montserrat 600, 11px</code></td></tr>
+    <tr><td>Chip padding</td><td><code>4px 12px</code>, radius <code>999px</code></td></tr>
+    <tr><td>Chip border</td><td><code>1px solid #d1d5db</code>, selected: <code>#0074e4</code> fill</td></tr>
+  </table></div>
+</section>
+
+<!-- AVATARS -->
+<section class="ds-section" id="avatars">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Avatar</div>
+    <div class="ds-section-desc">User representation in three sizes with initial-based fallbacks.</div>
+  </div>
+  <div class="ds-card">
+    <div class="comp-preview" style="gap:20px">
+      <div style="text-align:center"><div class="avatar avatar-sm">TJ</div><div style="font-size:10px;margin-top:4px;color:var(--navy-50)">SM 28px</div></div>
+      <div style="text-align:center"><div class="avatar">TJ</div><div style="font-size:10px;margin-top:4px;color:var(--navy-50)">MD 40px</div></div>
+      <div style="text-align:center"><div class="avatar avatar-lg">TJ</div><div style="font-size:10px;margin-top:4px;color:var(--navy-50)">LG 56px</div></div>
+      <div style="text-align:center"><div class="avatar" style="background:var(--purple)">GP</div><div style="font-size:10px;margin-top:4px;color:var(--navy-50)">GPaaS</div></div>
+      <div style="text-align:center"><div class="avatar" style="background:var(--green)">AI</div><div style="font-size:10px;margin-top:4px;color:var(--navy-50)">AISO</div></div>
+      <div style="text-align:center">
+        <div style="display:flex">
+          <div class="avatar avatar-sm" style="border:2px solid white;margin-right:-8px;z-index:3">A</div>
+          <div class="avatar avatar-sm" style="background:var(--purple);border:2px solid white;margin-right:-8px;z-index:2">B</div>
+          <div class="avatar avatar-sm" style="background:var(--green);border:2px solid white;z-index:1">C</div>
+        </div>
+        <div style="font-size:10px;margin-top:4px;color:var(--navy-50)">Group</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALERTS & TOAST -->
+<section class="ds-section" id="alerts">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Alerts &amp; Toast</div>
+    <div class="ds-section-desc">Contextual feedback messages for inline alerts and transient toast notifications.</div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-card-title">Inline Alerts</div>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px">
+      <div class="alert alert-info"><strong>Info:</strong>&nbsp;Your IEEF.v2.1 assessment is scheduled for next week.</div>
+      <div class="alert alert-success"><strong>Success:</strong>&nbsp;Governance framework deployed successfully across all teams.</div>
+      <div class="alert alert-warning"><strong>Warning:</strong>&nbsp;3 controls are approaching their review deadline.</div>
+      <div class="alert alert-error"><strong>Error:</strong>&nbsp;Failed to save assessment. Please check your connection and retry.</div>
+    </div>
+    <div class="ds-card-title" style="margin-top:24px">Toast Notifications</div>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px;max-width:400px">
+      <div class="toast-demo toast-success"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00b859" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>Assessment saved successfully</div>
+      <div class="toast-demo toast-error"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d32f2f" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>Connection lost. Retrying...</div>
+      <div class="toast-demo toast-info"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0074e4" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>New governance update available</div>
+    </div>
+  </div>
+  <div class="ds-card"><div class="ds-card-title">Specs</div><table class="comp-spec-table">
+    <tr><td>Alert padding</td><td><code>14px 16px</code>, radius <code>6px</code>, left border <code>3px</code></td></tr>
+    <tr><td>Toast padding</td><td><code>14px 18px</code>, radius <code>8px</code>, left border <code>4px</code></td></tr>
+    <tr><td>Toast shadow</td><td><code>shadow-lg</code></td></tr>
+    <tr><td>Toast position</td><td>Top-right, <code>16px</code> from edges, stacked <code>8px</code> apart</td></tr>
+    <tr><td>Auto-dismiss</td><td><code>5000ms</code> default, errors persist until dismissed</td></tr>
+    <tr><td>ARIA</td><td>Alert: <code>role="alert"</code>. Toast: <code>role="status" aria-live="polite"</code></td></tr>
+  </table></div>
+</section>
+
+<!-- CARDS -->
+<section class="ds-section" id="cards">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Cards</div>
+    <div class="ds-section-desc">Content containers for grouping related information and actions.</div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-grid ds-grid-3">
+      <div class="card-component">
+        <div class="card-component-img">GaaS</div>
+        <div class="card-component-body">
+          <div class="card-component-title">Governance Assessment</div>
+          <div class="card-component-text">Comprehensive IEEF.v2.1 assessment for organizational governance maturity.</div>
+          <div style="margin-top:12px"><span class="badge badge-blue">Active</span></div>
+        </div>
+      </div>
+      <div class="card-component">
+        <div class="card-component-img" style="background:linear-gradient(135deg,var(--purple),#8b7cf0)">GPaaS</div>
+        <div class="card-component-body">
+          <div class="card-component-title">Platform Dashboard</div>
+          <div class="card-component-text">Real-time governance metrics and continuous monitoring interface.</div>
+          <div style="margin-top:12px"><span class="badge badge-purple">Platform</span></div>
+        </div>
+      </div>
+      <div class="card-component">
+        <div class="card-component-img" style="background:linear-gradient(135deg,var(--green),#00d46a)">AISO</div>
+        <div class="card-component-body">
+          <div class="card-component-title">Implementation Plan</div>
+          <div class="card-component-text">Execution roadmap with milestone tracking and change management.</div>
+          <div style="margin-top:12px"><span class="badge badge-green">On Track</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ds-card"><div class="ds-card-title">Specs</div><table class="comp-spec-table">
+    <tr><td>Border</td><td><code>1px solid #e5e7eb</code>, radius <code>8px</code></td></tr>
+    <tr><td>Hover</td><td><code>shadow-lg</code></td></tr>
+    <tr><td>Body padding</td><td><code>20px</code></td></tr>
+    <tr><td>Title font</td><td><code>Montserrat 700, 16px</code></td></tr>
+  </table></div>
+</section>
+
+<!-- MODALS -->
+<section class="ds-section" id="modals">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Modal &amp; Dialog</div>
+    <div class="ds-section-desc">Overlay dialogs for focused tasks, confirmations, and critical information.</div>
+  </div>
+  <div class="ds-card">
+    <div class="comp-preview" style="background:rgba(0,31,63,0.3);padding:40px">
+      <div class="modal-demo">
+        <div class="modal-header">
+          <h3>Confirm Assessment</h3>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" style="cursor:pointer"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </div>
+        <div class="modal-body">
+          <p style="font-size:14px;color:var(--navy-70);line-height:1.6">Are you ready to submit the IEEF.v2.1 governance assessment? This action will notify all stakeholders and begin the review cycle.</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-ghost btn-sm">Cancel</button>
+          <button class="btn btn-primary btn-sm">Submit Assessment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ds-card"><div class="ds-card-title">Specs</div><table class="comp-spec-table">
+    <tr><td>Overlay</td><td><code>rgba(0,31,63,0.4)</code></td></tr>
+    <tr><td>Width</td><td>SM: <code>400px</code>, MD: <code>520px</code>, LG: <code>640px</code></td></tr>
+    <tr><td>Radius</td><td><code>12px</code></td></tr>
+    <tr><td>Shadow</td><td><code>shadow-xl</code></td></tr>
+    <tr><td>Header</td><td><code>20px 24px</code>, bottom border</td></tr>
+    <tr><td>Body</td><td><code>24px</code> padding</td></tr>
+    <tr><td>Footer</td><td><code>16px 24px</code>, top border, right-aligned actions</td></tr>
+    <tr><td>ARIA</td><td><code>role="dialog" aria-modal="true" aria-labelledby</code>. Trap focus. Close on Escape.</td></tr>
+  </table></div>
+</section>
+<!-- TABLES -->
+<section class="ds-section" id="tables">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Table</div>
+    <div class="ds-section-desc">Data tables for displaying governance records, assessments, and structured information.</div>
+  </div>
+  <div class="ds-card" style="overflow-x:auto">
+    <table class="ds-table">
+      <thead><tr><th>Assessment</th><th>Framework</th><th>Status</th><th>Maturity</th><th>Last Updated</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:500">Information Strategy Review</td><td>IEEF.v2.1</td><td><span class="badge badge-green">Compliant</span></td><td><div class="progress-bar" style="width:100px"><div class="progress-fill" style="width:85%;background:var(--green)"></div></div></td><td style="color:var(--navy-50)">12 Mar 2026</td></tr>
+        <tr><td style="font-weight:500">Data Governance Framework</td><td>IEEF.v2.1</td><td><span class="badge badge-orange">In Review</span></td><td><div class="progress-bar" style="width:100px"><div class="progress-fill" style="width:60%;background:var(--orange)"></div></div></td><td style="color:var(--navy-50)">10 Mar 2026</td></tr>
+        <tr><td style="font-weight:500">Risk & Compliance Audit</td><td>AISO</td><td><span class="badge badge-red">Critical</span></td><td><div class="progress-bar" style="width:100px"><div class="progress-fill" style="width:30%;background:var(--red)"></div></div></td><td style="color:var(--navy-50)">08 Mar 2026</td></tr>
+        <tr><td style="font-weight:500">Platform Integration</td><td>GPaaS</td><td><span class="badge badge-blue">Active</span></td><td><div class="progress-bar" style="width:100px"><div class="progress-fill" style="width:45%;background:var(--blue)"></div></div></td><td style="color:var(--navy-50)">05 Mar 2026</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="ds-card"><div class="ds-card-title">Specs</div><table class="comp-spec-table">
+    <tr><td>Header</td><td>BG: <code>#F7F7F7</code>, font: <code>Montserrat 600 12px</code>, uppercase tracking <code>0.3px</code></td></tr>
+    <tr><td>Cell padding</td><td><code>10px 14px</code></td></tr>
+    <tr><td>Row border</td><td><code>1px solid #F7F7F7</code></td></tr>
+    <tr><td>Hover row</td><td>BG: <code>rgba(0,116,228,0.02)</code></td></tr>
+    <tr><td>Striped alt</td><td>Optional: odd rows <code>#fafafa</code></td></tr>
+  </table></div>
+</section>
+
+<!-- NAVIGATION -->
+<section class="ds-section" id="navigation">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Navigation</div>
+    <div class="ds-section-desc">Top bar, sidebar, and mobile navigation patterns.</div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-card-title">Top Navigation Bar</div>
+    <div style="background:var(--navy);border-radius:8px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:56px;margin-top:8px">
+      <div style="display:flex;align-items:center;gap:24px">
+        <div style="font-family:var(--font-display);font-weight:700;font-size:14px;color:white;letter-spacing:0.5px">RGX ENGAGE</div>
+        <div style="display:flex;gap:4px">
+          <span style="color:white;font-size:13px;font-weight:500;padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:6px">Dashboard</span>
+          <span style="color:rgba(255,255,255,0.6);font-size:13px;font-weight:500;padding:6px 12px;border-radius:6px">Assessments</span>
+          <span style="color:rgba(255,255,255,0.6);font-size:13px;font-weight:500;padding:6px 12px;border-radius:6px">Reports</span>
+          <span style="color:rgba(255,255,255,0.6);font-size:13px;font-weight:500;padding:6px 12px;border-radius:6px">Settings</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="avatar avatar-sm" style="background:var(--blue)">TJ</div>
+      </div>
+    </div>
+  </div>
+  <div class="ds-card"><div class="ds-card-title">Specs</div><table class="comp-spec-table">
+    <tr><td>Height</td><td><code>56px</code></td></tr>
+    <tr><td>Background</td><td><code>#001f3f (Strategic Navy)</code></td></tr>
+    <tr><td>Active item</td><td>BG: <code>rgba(255,255,255,0.1)</code>, radius <code>6px</code></td></tr>
+    <tr><td>Text</td><td>Active: white. Inactive: <code>rgba(255,255,255,0.6)</code></td></tr>
+    <tr><td>Logo font</td><td><code>Montserrat 700 14px</code>, tracking <code>0.5px</code></td></tr>
+  </table></div>
+</section>
+
+<!-- TABS -->
+<section class="ds-section" id="tabs">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Tabs</div>
+    <div class="ds-section-desc">Content organization through tabbed navigation.</div>
+  </div>
+  <div class="ds-card">
+    <div class="comp-preview" style="flex-direction:column;align-items:stretch">
+      <div class="tab-bar">
+        <div class="tab-item active">Overview</div>
+        <div class="tab-item">Assessments</div>
+        <div class="tab-item">Controls</div>
+        <div class="tab-item">History</div>
+      </div>
+      <div style="padding:16px 0;font-size:13px;color:var(--navy-70)">Tab content area — displays content for the selected tab.</div>
+    </div>
+  </div>
+  <div class="ds-card"><div class="ds-card-title">Specs</div><table class="comp-spec-table">
+    <tr><td>Item padding</td><td><code>10px 16px</code></td></tr>
+    <tr><td>Font</td><td><code>Montserrat 600 13px</code></td></tr>
+    <tr><td>Active indicator</td><td><code>2px</code> bottom border, <code>#0074e4</code></td></tr>
+    <tr><td>ARIA</td><td><code>role="tablist"</code>, <code>role="tab"</code> with <code>aria-selected</code>, <code>role="tabpanel"</code></td></tr>
+  </table></div>
+</section>
+
+<!-- PAGINATION -->
+<section class="ds-section" id="pagination">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Pagination</div>
+    <div class="ds-section-desc">Page navigation for paginated content and data sets.</div>
+  </div>
+  <div class="ds-card">
+    <div class="comp-preview">
+      <div class="pagination">
+        <div class="page-btn">‹</div>
+        <div class="page-btn active">1</div>
+        <div class="page-btn">2</div>
+        <div class="page-btn">3</div>
+        <div class="page-btn" style="border:none;cursor:default">…</div>
+        <div class="page-btn">12</div>
+        <div class="page-btn">›</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRESS -->
+<section class="ds-section" id="progress">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Progress &amp; Loading</div>
+    <div class="ds-section-desc">Visual indicators for task completion, loading states, and process tracking.</div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-card-title">Progress Bars</div>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-top:12px">
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:600">Governance Maturity</span><span style="font-size:12px;color:var(--navy-50)">85%</span></div><div class="progress-bar" style="height:8px"><div class="progress-fill" style="width:85%;background:var(--green)"></div></div></div>
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:600">Assessment Progress</span><span style="font-size:12px;color:var(--navy-50)">60%</span></div><div class="progress-bar" style="height:8px"><div class="progress-fill" style="width:60%;background:var(--blue)"></div></div></div>
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:600">Risk Level</span><span style="font-size:12px;color:var(--navy-50)">30%</span></div><div class="progress-bar" style="height:8px"><div class="progress-fill" style="width:30%;background:var(--red)"></div></div></div>
+    </div>
+    <div class="ds-card-title" style="margin-top:24px">Spinner</div>
+    <div class="comp-preview">
+      <div style="width:32px;height:32px;border:3px solid var(--grey-light);border-top-color:var(--blue);border-radius:50%;animation:spin 0.8s linear infinite"></div>
+      <div style="width:24px;height:24px;border:2px solid var(--grey-light);border-top-color:var(--blue);border-radius:50%;animation:spin 0.8s linear infinite"></div>
+      <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+    </div>
+  </div>
+</section>
+
+<!-- STEPPER -->
+<section class="ds-section" id="stepper">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Stepper</div>
+    <div class="ds-section-desc">Multi-step process indicator for wizards and sequential workflows.</div>
+  </div>
+  <div class="ds-card">
+    <div class="comp-preview" style="padding:24px 32px">
+      <div class="stepper" style="width:100%">
+        <div class="step"><div class="step-circle completed">✓</div><div class="step-label">Scope</div></div>
+        <div class="step-line completed"></div>
+        <div class="step"><div class="step-circle completed">✓</div><div class="step-label">Assess</div></div>
+        <div class="step-line completed"></div>
+        <div class="step"><div class="step-circle active">3</div><div class="step-label">Implement</div></div>
+        <div class="step-line"></div>
+        <div class="step"><div class="step-circle pending">4</div><div class="step-label">Optimize</div></div>
+        <div class="step-line"></div>
+        <div class="step"><div class="step-circle pending">5</div><div class="step-label">Evolve</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLTIP -->
+<section class="ds-section" id="tooltip">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Tooltip</div>
+    <div class="ds-section-desc">Contextual information on hover for supplementary detail.</div>
+  </div>
+  <div class="ds-card">
+    <div class="comp-preview" style="gap:32px">
+      <div class="tooltip-demo"><button class="btn btn-secondary btn-sm">Hover me</button><span class="tooltip-text">IEEF.v2.1 Assessment</span></div>
+      <div class="tooltip-demo"><span class="badge badge-blue" style="cursor:help">GaaS</span><span class="tooltip-text">Governance-as-a-Service</span></div>
+    </div>
+  </div>
+  <div class="ds-card"><div class="ds-card-title">Specs</div><table class="comp-spec-table">
+    <tr><td>Background</td><td><code>#001f3f</code></td></tr>
+    <tr><td>Text</td><td><code>white, 12px</code></td></tr>
+    <tr><td>Padding</td><td><code>6px 10px</code>, radius <code>6px</code></td></tr>
+    <tr><td>Delay</td><td>Show: <code>200ms</code>, hide: <code>100ms</code></td></tr>
+    <tr><td>ARIA</td><td><code>role="tooltip"</code>, trigger uses <code>aria-describedby</code></td></tr>
+  </table></div>
+</section>
+
+<!-- BREADCRUMB -->
+<section class="ds-section" id="breadcrumb">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Breadcrumb</div>
+    <div class="ds-section-desc">Hierarchical navigation path showing the user's current location.</div>
+  </div>
+  <div class="ds-card">
+    <div class="comp-preview" style="justify-content:flex-start">
+      <nav class="breadcrumb"><a href="#">Dashboard</a><span class="sep">/</span><a href="#">Assessments</a><span class="sep">/</span><span style="font-weight:500;color:var(--navy)">IEEF.v2.1 Review</span></nav>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<section class="ds-section" id="divider">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Divider</div>
+    <div class="ds-section-desc">Visual separator for content sections.</div>
+  </div>
+  <div class="ds-card">
+    <p style="font-size:13px;color:var(--navy-70)">Content above the divider</p>
+    <div class="divider"></div>
+    <p style="font-size:13px;color:var(--navy-70)">Content below the divider</p>
+    <div style="margin-top:16px"><div style="height:1px;background:var(--navy);margin:16px 0"></div></div>
+    <p style="font-size:11px;color:var(--navy-50)">Variants: Light (<code>#F7F7F7</code>), Default (<code>#e5e7eb</code>), Strong (<code>#292627</code>)</p>
+  </div>
+</section>
+
+<!-- EMPTY STATE -->
+<section class="ds-section" id="emptystate">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Empty State</div>
+    <div class="ds-section-desc">Placeholder content for empty views, first-time experiences, and zero-data states.</div>
+  </div>
+  <div class="ds-card">
+    <div class="comp-preview" style="min-height:240px">
+      <div class="empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v4M12 16h.01"/></svg>
+        <h4>No assessments yet</h4>
+        <p style="max-width:300px;margin:0 auto 16px;font-size:13px;line-height:1.5">Start your first IEEF.v2.1 governance assessment to begin tracking organizational maturity.</p>
+        <button class="btn btn-primary btn-sm">Create Assessment</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKELETON -->
+<section class="ds-section" id="skeleton">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Skeleton Loader</div>
+    <div class="ds-section-desc">Placeholder loading states that indicate content structure before data arrives.</div>
+  </div>
+  <div class="ds-card">
+    <div class="comp-preview" style="flex-direction:column;align-items:stretch;gap:12px">
+      <div style="display:flex;gap:12px;align-items:center"><div class="skeleton" style="width:40px;height:40px;border-radius:50%;flex-shrink:0"></div><div style="flex:1"><div class="skeleton" style="height:14px;width:60%;margin-bottom:8px"></div><div class="skeleton" style="height:10px;width:40%"></div></div></div>
+      <div class="skeleton" style="height:14px;width:100%"></div>
+      <div class="skeleton" style="height:14px;width:90%"></div>
+      <div class="skeleton" style="height:14px;width:75%"></div>
+      <div style="display:flex;gap:12px;margin-top:8px"><div class="skeleton" style="height:32px;width:100px;border-radius:6px"></div><div class="skeleton" style="height:32px;width:80px;border-radius:6px"></div></div>
+    </div>
+  </div>
+</section>
+<!-- FORM PATTERNS -->
+<section class="ds-section" id="forms">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Form Patterns</div>
+    <div class="ds-section-desc">Reusable form compositions for governance workflows including search, settings, and assessment entry.</div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-card-title">Assessment Entry Form</div>
+    <div style="max-width:520px;margin-top:16px">
+      <div style="margin-bottom:20px"><label style="font-size:12px;font-weight:600;color:var(--navy);display:block;margin-bottom:4px">Assessment Title *</label><input class="input" type="text" placeholder="e.g., Q1 Governance Maturity Review"></div>
+      <div style="margin-bottom:20px"><label style="font-size:12px;font-weight:600;color:var(--navy);display:block;margin-bottom:4px">Framework</label><select class="select" style="width:100%"><option>IEEF.v2.1</option><option>AISO</option><option>Custom</option></select></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+        <div><label style="font-size:12px;font-weight:600;color:var(--navy);display:block;margin-bottom:4px">Start Date</label><input class="input" type="text" placeholder="DD/MM/YYYY"></div>
+        <div><label style="font-size:12px;font-weight:600;color:var(--navy);display:block;margin-bottom:4px">End Date</label><input class="input" type="text" placeholder="DD/MM/YYYY"></div>
+      </div>
+      <div style="margin-bottom:20px"><label style="font-size:12px;font-weight:600;color:var(--navy);display:block;margin-bottom:4px">Description</label><textarea class="textarea" placeholder="Describe the scope and objectives..." rows="3"></textarea></div>
+      <div style="margin-bottom:20px">
+        <label style="font-size:12px;font-weight:600;color:var(--navy);display:block;margin-bottom:8px">Service Line</label>
+        <div style="display:flex;gap:16px">
+          <label class="checkbox-demo"><span class="checkbox-box radio-box checked"></span>GaaS</label>
+          <label class="checkbox-demo"><span class="checkbox-box radio-box"></span>GPaaS</label>
+          <label class="checkbox-demo"><span class="checkbox-box radio-box"></span>Combined</label>
+        </div>
+      </div>
+      <div class="divider" style="margin:24px 0"></div>
+      <div style="display:flex;justify-content:flex-end;gap:8px"><button class="btn btn-ghost">Cancel</button><button class="btn btn-primary">Create Assessment</button></div>
+    </div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-card-title">Form Guidelines</div>
+    <div style="font-size:13px;color:var(--navy-70);line-height:1.7">
+      <p style="margin-bottom:8px"><strong>Label placement:</strong> Top-aligned labels for scannability. Required fields marked with * asterisk.</p>
+      <p style="margin-bottom:8px"><strong>Field spacing:</strong> 20px (sp-5) between field groups. 4px between label and input.</p>
+      <p style="margin-bottom:8px"><strong>Actions:</strong> Right-aligned, primary action last. Destructive actions separated with divider.</p>
+      <p style="margin-bottom:8px"><strong>Validation:</strong> Inline, on blur. Error messages below field in red at 11px. Use <code>aria-describedby</code> linking error to input.</p>
+      <p><strong>Width:</strong> Single-column max 520px. Two-column grid for related short fields (dates, dimensions).</p>
+    </div>
+  </div>
+</section>
+
+<!-- LAYOUT PATTERNS -->
+<section class="ds-section" id="layouts">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Layout Patterns</div>
+    <div class="ds-section-desc">Common page compositions for governance dashboards, detail views, and settings.</div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-card-title">Dashboard Layout</div>
+    <div style="background:var(--grey-light);border-radius:8px;padding:12px;margin-top:12px">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:8px">
+        <div style="background:white;padding:12px;border-radius:6px;border:1px solid #e5e7eb"><div style="font-size:9px;color:var(--navy-50);margin-bottom:4px">KPI CARD</div><div style="font-family:var(--font-display);font-weight:800;font-size:20px;color:var(--navy)">85%</div></div>
+        <div style="background:white;padding:12px;border-radius:6px;border:1px solid #e5e7eb"><div style="font-size:9px;color:var(--navy-50);margin-bottom:4px">KPI CARD</div><div style="font-family:var(--font-display);font-weight:800;font-size:20px;color:var(--blue)">24</div></div>
+        <div style="background:white;padding:12px;border-radius:6px;border:1px solid #e5e7eb"><div style="font-size:9px;color:var(--navy-50);margin-bottom:4px">KPI CARD</div><div style="font-family:var(--font-display);font-weight:800;font-size:20px;color:var(--green)">+12%</div></div>
+        <div style="background:white;padding:12px;border-radius:6px;border:1px solid #e5e7eb"><div style="font-size:9px;color:var(--navy-50);margin-bottom:4px">KPI CARD</div><div style="font-family:var(--font-display);font-weight:800;font-size:20px;color:var(--red)">3</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:8px">
+        <div style="background:white;padding:12px;border-radius:6px;border:1px solid #e5e7eb;min-height:100px"><div style="font-size:9px;color:var(--navy-50)">MAIN CHART AREA — 8 COLUMNS</div></div>
+        <div style="background:white;padding:12px;border-radius:6px;border:1px solid #e5e7eb;min-height:100px"><div style="font-size:9px;color:var(--navy-50)">SIDEBAR — 4 COLUMNS</div></div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--navy-50);margin-top:8px">Pattern: 4 KPI cards across top (3-col each), main content 8-col + sidebar 4-col below. Page padding: 48px.</div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-card-title">Detail View Layout</div>
+    <div style="background:var(--grey-light);border-radius:8px;padding:12px;margin-top:12px">
+      <div style="background:white;padding:12px;border-radius:6px;border:1px solid #e5e7eb;margin-bottom:8px"><div style="font-size:9px;color:var(--navy-50)">BREADCRUMB + PAGE HEADER + ACTIONS</div></div>
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:8px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="background:white;padding:12px;border-radius:6px;border:1px solid #e5e7eb"><div style="font-size:9px;color:var(--navy-50)">TAB BAR</div></div>
+          <div style="background:white;padding:12px;border-radius:6px;border:1px solid #e5e7eb;min-height:120px"><div style="font-size:9px;color:var(--navy-50)">TAB CONTENT — MAIN 8 COLUMNS</div></div>
+        </div>
+        <div style="background:white;padding:12px;border-radius:6px;border:1px solid #e5e7eb;min-height:160px"><div style="font-size:9px;color:var(--navy-50)">META SIDEBAR — 4 COLUMNS</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN TOKENS -->
+<section class="ds-section" id="tokens">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Design Tokens</div>
+    <div class="ds-section-desc">Complete token reference in JSON format for design-to-code handoff. Copy directly into your codebase.</div>
+  </div>
+  <div class="ds-card">
+    <div class="ds-card-title">tokens.json</div>
+    <div class="code-block"><span class="code-label">JSON</span><pre style="margin:0;white-space:pre-wrap">{
+  <span class="key">"color"</span>: {
+    <span class="key">"brand"</span>: {
+      <span class="key">"navy"</span>:    <span class="string">"#001f3f"</span>,
+      <span class="key">"blue"</span>:    <span class="string">"#0074e4"</span>,
+      <span class="key">"grey"</span>:    <span class="string">"#292627"</span>,
+      <span class="key">"greyLight"</span>: <span class="string">"#F7F7F7"</span>,
+      <span class="key">"white"</span>:   <span class="string">"#ffffff"</span>
+    },
+    <span class="key">"accent"</span>: {
+      <span class="key">"orange"</span>:  <span class="string">"#f15a24"</span>,
+      <span class="key">"green"</span>:   <span class="string">"#00b859"</span>,
+      <span class="key">"purple"</span>:  <span class="string">"#6c5ce7"</span>,
+      <span class="key">"yellow"</span>:  <span class="string">"#f8bf00"</span>,
+      <span class="key">"red"</span>:     <span class="string">"#d32f2f"</span>
+    },
+    <span class="key">"semantic"</span>: {
+      <span class="key">"interactive"</span>: { <span class="key">"default"</span>: <span class="string">"#0074e4"</span>, <span class="key">"hover"</span>: <span class="string">"#005bb5"</span>, <span class="key">"active"</span>: <span class="string">"#004a94"</span>, <span class="key">"subtle"</span>: <span class="string">"#e8f2fd"</span> },
+      <span class="key">"success"</span>:     { <span class="key">"default"</span>: <span class="string">"#00b859"</span>, <span class="key">"dark"</span>: <span class="string">"#047a3e"</span>, <span class="key">"light"</span>: <span class="string">"#dcfce7"</span>, <span class="key">"subtle"</span>: <span class="string">"#f0fdf4"</span> },
+      <span class="key">"warning"</span>:     { <span class="key">"default"</span>: <span class="string">"#f8bf00"</span>, <span class="key">"dark"</span>: <span class="string">"#6b5900"</span>, <span class="key">"light"</span>: <span class="string">"#fef9c3"</span>, <span class="key">"subtle"</span>: <span class="string">"#fffbeb"</span> },
+      <span class="key">"error"</span>:       { <span class="key">"default"</span>: <span class="string">"#d32f2f"</span>, <span class="key">"dark"</span>: <span class="string">"#7f1d1d"</span>, <span class="key">"light"</span>: <span class="string">"#fecaca"</span>, <span class="key">"subtle"</span>: <span class="string">"#fef2f2"</span> }
+    },
+    <span class="key">"dark"</span>: {
+      <span class="key">"surface"</span>: <span class="string">"#0a1628"</span>, <span class="key">"card"</span>: <span class="string">"#0f2440"</span>, <span class="key">"elevated"</span>: <span class="string">"#163358"</span>,
+      <span class="key">"primary"</span>: <span class="string">"#2196f3"</span>, <span class="key">"text"</span>: <span class="string">"rgba(255,255,255,0.87)"</span>,
+      <span class="key">"textSecondary"</span>: <span class="string">"rgba(255,255,255,0.6)"</span>, <span class="key">"border"</span>: <span class="string">"rgba(255,255,255,0.12)"</span>
+    }
+  },
+  <span class="key">"typography"</span>: {
+    <span class="key">"fontFamily"</span>: {
+      <span class="key">"display"</span>: <span class="string">"'Montserrat', system-ui, sans-serif"</span>,
+      <span class="key">"body"</span>:    <span class="string">"'Inter', system-ui, sans-serif"</span>,
+      <span class="key">"mono"</span>:    <span class="string">"'JetBrains Mono', monospace"</span>
+    },
+    <span class="key">"scale"</span>: {
+      <span class="key">"display"</span>: { <span class="key">"size"</span>: <span class="number">48</span>, <span class="key">"lineHeight"</span>: <span class="number">52</span>, <span class="key">"weight"</span>: <span class="number">800</span>, <span class="key">"tracking"</span>: <span class="number">-0.02</span> },
+      <span class="key">"h1"</span>:      { <span class="key">"size"</span>: <span class="number">36</span>, <span class="key">"lineHeight"</span>: <span class="number">40</span>, <span class="key">"weight"</span>: <span class="number">800</span>, <span class="key">"tracking"</span>: <span class="number">-0.02</span> },
+      <span class="key">"h2"</span>:      { <span class="key">"size"</span>: <span class="number">30</span>, <span class="key">"lineHeight"</span>: <span class="number">36</span>, <span class="key">"weight"</span>: <span class="number">700</span>, <span class="key">"tracking"</span>: <span class="number">-0.01</span> },
+      <span class="key">"h3"</span>:      { <span class="key">"size"</span>: <span class="number">24</span>, <span class="key">"lineHeight"</span>: <span class="number">30</span>, <span class="key">"weight"</span>: <span class="number">700</span>, <span class="key">"tracking"</span>: <span class="number">0</span> },
+      <span class="key">"h4"</span>:      { <span class="key">"size"</span>: <span class="number">20</span>, <span class="key">"lineHeight"</span>: <span class="number">28</span>, <span class="key">"weight"</span>: <span class="number">600</span>, <span class="key">"tracking"</span>: <span class="number">0</span> },
+      <span class="key">"h5"</span>:      { <span class="key">"size"</span>: <span class="number">18</span>, <span class="key">"lineHeight"</span>: <span class="number">26</span>, <span class="key">"weight"</span>: <span class="number">600</span>, <span class="key">"tracking"</span>: <span class="number">0</span> },
+      <span class="key">"body"</span>:    { <span class="key">"size"</span>: <span class="number">16</span>, <span class="key">"lineHeight"</span>: <span class="number">24</span>, <span class="key">"weight"</span>: <span class="number">400</span>, <span class="key">"tracking"</span>: <span class="number">0</span> },
+      <span class="key">"small"</span>:   { <span class="key">"size"</span>: <span class="number">14</span>, <span class="key">"lineHeight"</span>: <span class="number">20</span>, <span class="key">"weight"</span>: <span class="number">400</span>, <span class="key">"tracking"</span>: <span class="number">0</span> },
+      <span class="key">"caption"</span>: { <span class="key">"size"</span>: <span class="number">12</span>, <span class="key">"lineHeight"</span>: <span class="number">16</span>, <span class="key">"weight"</span>: <span class="number">500</span>, <span class="key">"tracking"</span>: <span class="number">0.01</span> }
+    }
+  },
+  <span class="key">"spacing"</span>: {
+    <span class="key">"1"</span>: <span class="number">4</span>, <span class="key">"2"</span>: <span class="number">8</span>, <span class="key">"3"</span>: <span class="number">12</span>, <span class="key">"4"</span>: <span class="number">16</span>, <span class="key">"5"</span>: <span class="number">20</span>,
+    <span class="key">"6"</span>: <span class="number">24</span>, <span class="key">"8"</span>: <span class="number">32</span>, <span class="key">"10"</span>: <span class="number">40</span>, <span class="key">"12"</span>: <span class="number">48</span>,
+    <span class="key">"16"</span>: <span class="number">64</span>, <span class="key">"20"</span>: <span class="number">80</span>, <span class="key">"24"</span>: <span class="number">96</span>
+  },
+  <span class="key">"radius"</span>: { <span class="key">"sm"</span>: <span class="number">4</span>, <span class="key">"md"</span>: <span class="number">6</span>, <span class="key">"lg"</span>: <span class="number">8</span>, <span class="key">"xl"</span>: <span class="number">12</span>, <span class="key">"full"</span>: <span class="number">999</span> },
+  <span class="key">"shadow"</span>: {
+    <span class="key">"xs"</span>: <span class="string">"0 1px 2px rgba(0,31,63,0.05)"</span>,
+    <span class="key">"sm"</span>: <span class="string">"0 1px 3px rgba(0,31,63,0.1)"</span>,
+    <span class="key">"md"</span>: <span class="string">"0 4px 6px rgba(0,31,63,0.1)"</span>,
+    <span class="key">"lg"</span>: <span class="string">"0 10px 15px rgba(0,31,63,0.1)"</span>,
+    <span class="key">"xl"</span>: <span class="string">"0 20px 25px rgba(0,31,63,0.15)"</span>
+  },
+  <span class="key">"breakpoint"</span>: { <span class="key">"mobile"</span>: <span class="number">640</span>, <span class="key">"tablet"</span>: <span class="number">1024</span>, <span class="key">"desktop"</span>: <span class="number">1440</span> },
+  <span class="key">"grid"</span>: {
+    <span class="key">"columns"</span>: { <span class="key">"mobile"</span>: <span class="number">4</span>, <span class="key">"tablet"</span>: <span class="number">8</span>, <span class="key">"desktop"</span>: <span class="number">12</span> },
+    <span class="key">"gutter"</span>:  { <span class="key">"mobile"</span>: <span class="number">16</span>, <span class="key">"tablet"</span>: <span class="number">24</span>, <span class="key">"desktop"</span>: <span class="number">24</span>, <span class="key">"wide"</span>: <span class="number">32</span> },
+    <span class="key">"margin"</span>:  { <span class="key">"mobile"</span>: <span class="number">16</span>, <span class="key">"tablet"</span>: <span class="number">24</span>, <span class="key">"desktop"</span>: <span class="number">48</span>, <span class="key">"wide"</span>: <span class="string">"auto"</span> }
+  },
+  <span class="key">"transition"</span>: {
+    <span class="key">"fast"</span>: <span class="string">"100ms ease"</span>,
+    <span class="key">"default"</span>: <span class="string">"150ms ease"</span>,
+    <span class="key">"slow"</span>: <span class="string">"300ms ease"</span>
+  }
+}</pre></div>
+  </div>
+</section>
+
+<!-- ACCESSIBILITY -->
+<section class="ds-section" id="accessibility">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Accessibility</div>
+    <div class="ds-section-desc">WCAG 2.1 AA compliance guidelines for all components. These standards are non-negotiable across the RGX Engage ecosystem.</div>
+  </div>
+  <div class="ds-grid ds-grid-2">
+    <div class="ds-card" style="border-left:4px solid var(--blue)">
+      <div class="ds-card-title">Color &amp; Contrast</div>
+      <div style="font-size:13px;color:var(--navy-70);line-height:1.7">
+        <p style="margin-bottom:8px">Normal text: minimum 4.5:1 contrast ratio.</p>
+        <p style="margin-bottom:8px">Large text (18px+ or 14px bold): minimum 3:1.</p>
+        <p style="margin-bottom:8px">UI components and graphical objects: minimum 3:1.</p>
+        <p style="margin-bottom:8px">Never rely on color alone to convey information — pair with icons, text, or patterns.</p>
+        <p>Test with deuteranopia, protanopia, and tritanopia simulators.</p>
+      </div>
+    </div>
+    <div class="ds-card" style="border-left:4px solid var(--purple)">
+      <div class="ds-card-title">Keyboard Navigation</div>
+      <div style="font-size:13px;color:var(--navy-70);line-height:1.7">
+        <p style="margin-bottom:8px">All interactive elements must be reachable via Tab key.</p>
+        <p style="margin-bottom:8px">Focus indicator: 2px solid blue outline at 2px offset.</p>
+        <p style="margin-bottom:8px">Escape closes modals, dropdowns, and tooltips.</p>
+        <p style="margin-bottom:8px">Arrow keys navigate within composite widgets (tabs, menus, radios).</p>
+        <p>Enter/Space activates focused elements.</p>
+      </div>
+    </div>
+    <div class="ds-card" style="border-left:4px solid var(--green)">
+      <div class="ds-card-title">ARIA Patterns</div>
+      <div style="font-size:13px;color:var(--navy-70);line-height:1.7">
+        <p style="margin-bottom:8px">Buttons: native <code>&lt;button&gt;</code> elements. No <code>div</code> with <code>role="button"</code>.</p>
+        <p style="margin-bottom:8px">Modals: <code>role="dialog" aria-modal="true"</code> with focus trap.</p>
+        <p style="margin-bottom:8px">Alerts: <code>role="alert"</code> for inline, <code>role="status" aria-live="polite"</code> for toast.</p>
+        <p style="margin-bottom:8px">Forms: every input has a visible <code>&lt;label&gt;</code> with <code>for</code> attribute. Error messages linked via <code>aria-describedby</code>.</p>
+        <p>Tables: use <code>&lt;th scope="col"&gt;</code> headers. Complex tables get <code>aria-label</code>.</p>
+      </div>
+    </div>
+    <div class="ds-card" style="border-left:4px solid var(--orange)">
+      <div class="ds-card-title">Motion &amp; Animation</div>
+      <div style="font-size:13px;color:var(--navy-70);line-height:1.7">
+        <p style="margin-bottom:8px">Respect <code>prefers-reduced-motion</code>: disable transitions and animations.</p>
+        <p style="margin-bottom:8px">No auto-playing animations longer than 5 seconds.</p>
+        <p style="margin-bottom:8px">Provide pause/stop controls for any persistent motion.</p>
+        <p>Skeleton loaders and spinners are exempt but should be subtle.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ds-card" style="margin-top:24px">
+    <div class="ds-card-title">Component ARIA Reference</div>
+    <table class="comp-spec-table">
+      <tr><th>Component</th><th>Role</th><th>Key Attributes</th><th>Keyboard</th></tr>
+      <tr><td>Button</td><td>Native <code>&lt;button&gt;</code></td><td><code>aria-disabled</code>, <code>aria-pressed</code> (toggle)</td><td>Enter, Space</td></tr>
+      <tr><td>Input</td><td>Native <code>&lt;input&gt;</code></td><td><code>aria-invalid</code>, <code>aria-describedby</code></td><td>Standard</td></tr>
+      <tr><td>Toggle</td><td><code>role="switch"</code></td><td><code>aria-checked</code></td><td>Space</td></tr>
+      <tr><td>Modal</td><td><code>role="dialog"</code></td><td><code>aria-modal</code>, <code>aria-labelledby</code></td><td>Escape, Tab trap</td></tr>
+      <tr><td>Tabs</td><td><code>role="tablist"</code></td><td><code>aria-selected</code>, <code>aria-controls</code></td><td>Arrow keys</td></tr>
+      <tr><td>Tooltip</td><td><code>role="tooltip"</code></td><td><code>aria-describedby</code></td><td>Escape to dismiss</td></tr>
+      <tr><td>Alert</td><td><code>role="alert"</code></td><td><code>aria-live="assertive"</code></td><td>—</td></tr>
+      <tr><td>Toast</td><td><code>role="status"</code></td><td><code>aria-live="polite"</code></td><td>—</td></tr>
+      <tr><td>Dropdown</td><td><code>role="menu"</code></td><td><code>aria-expanded</code>, <code>aria-haspopup</code></td><td>Arrow, Enter, Escape</td></tr>
+      <tr><td>Breadcrumb</td><td><code>nav aria-label</code></td><td><code>aria-current="page"</code> on last</td><td>Tab</td></tr>
+    </table>
+  </div>
+</section>
+<!-- DEV GUIDE -->
+<section class="ds-section" id="devguide">
+  <div class="ds-section-header">
+    <div class="ds-section-title">Developer Guide</div>
+    <div class="ds-section-desc">Implementation reference for engineers building with the RGX Engage design system.</div>
+  </div>
+
+  <div class="ds-card">
+    <div class="ds-card-title">Getting Started</div>
+    <p style="font-size:13px;color:var(--navy-70);line-height:1.6;margin-top:8px">
+      The RGX Engage design system is built on CSS custom properties (design tokens), semantic HTML, and accessibility-first patterns. All tokens are defined on <code>:root</code> and can be consumed in any CSS-in-JS or plain CSS project.
+    </p>
+    <div style="margin-top:16px">
+      <pre class="code-block"><code>/* 1. Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* 2. Import design tokens (or paste :root block) */
+@import url('./tokens.css');
+
+/* 3. Apply base styles */
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--navy);
+  background: var(--white);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}</code></pre>
+    </div>
+  </div>
+
+  <div class="ds-card">
+    <div class="ds-card-title">CSS Variable Usage</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+      <div>
+        <h4 style="font-size:13px;font-weight:600;margin-bottom:8px">Colors</h4>
+        <pre class="code-block"><code>/* Brand colors */
+color: var(--navy);
+background: var(--blue);
+border-color: var(--grey-light);
+
+/* Semantic colors */
+color: var(--green);       /* success */
+color: var(--orange);      /* warning */
+color: var(--red);         /* error */
+color: var(--blue);        /* info */
+
+/* Opacity variants */
+background: rgba(0,116,228, 0.08);
+/* or use pre-defined: */
+color: var(--navy-70);
+color: var(--navy-50);</code></pre>
+      </div>
+      <div>
+        <h4 style="font-size:13px;font-weight:600;margin-bottom:8px">Typography</h4>
+        <pre class="code-block"><code>/* Display heading */
+font-family: var(--font-display);
+font-size: var(--text-display);
+font-weight: 800;
+letter-spacing: -0.5px;
+
+/* Body text */
+font-family: var(--font-body);
+font-size: var(--text-body);
+font-weight: 400;
+line-height: 1.5;
+
+/* Code / monospace */
+font-family: var(--font-mono);
+font-size: var(--text-caption);</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-card">
+    <div class="ds-card-title">Spacing & Layout</div>
+    <pre class="code-block"><code>/* Use the 8px grid via tokens */
+padding: var(--space-sm);          /* 8px  */
+margin-bottom: var(--space-md);    /* 16px */
+gap: var(--space-lg);              /* 24px */
+
+/* Grid setup */
+.container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-lg);            /* 24px gutter */
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl);     /* 32px margin */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);          /* 16px gutter */
+    padding: 0 var(--space-md);   /* 16px margin */
+  }
+}</code></pre>
+  </div>
+
+  <div class="ds-card">
+    <div class="ds-card-title">Component Composition</div>
+    <pre class="code-block"><code>&lt;!-- Button with icon --&gt;
+&lt;button class="btn btn-primary"&gt;
+  &lt;svg class="btn-icon" ...&gt;...&lt;/svg&gt;
+  Create Assessment
+&lt;/button&gt;
+
+&lt;!-- Card with badge and progress --&gt;
+&lt;div class="card" role="region" aria-label="Assessment summary"&gt;
+  &lt;div class="card-header"&gt;
+    &lt;h3&gt;IEEF.v2.1 Review&lt;/h3&gt;
+    &lt;span class="badge badge-green"&gt;Compliant&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="card-body"&gt;
+    &lt;div class="progress-bar" role="progressbar"
+         aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"&gt;
+      &lt;div class="progress-fill" style="width:85%"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Form field with validation --&gt;
+&lt;div class="form-group"&gt;
+  &lt;label for="title"&gt;Assessment Title&lt;/label&gt;
+  &lt;input id="title" type="text" class="input"
+         aria-required="true" aria-invalid="false" /&gt;
+  &lt;span class="helper-text"&gt;Enter a descriptive title&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="ds-card">
+    <div class="ds-card-title">Naming Conventions</div>
+    <table class="comp-spec-table">
+      <tr><td>Components</td><td>BEM-inspired: <code>.card</code>, <code>.card-header</code>, <code>.card--elevated</code></td></tr>
+      <tr><td>Utilities</td><td>Functional: <code>.text-center</code>, <code>.mt-lg</code>, <code>.flex</code></td></tr>
+      <tr><td>States</td><td>Adjective modifiers: <code>.active</code>, <code>.disabled</code>, <code>.error</code></td></tr>
+      <tr><td>Variants</td><td>Type suffix: <code>.btn-primary</code>, <code>.btn-ghost</code>, <code>.badge-green</code></td></tr>
+      <tr><td>Sizes</td><td>T-shirt: <code>.btn-sm</code>, <code>.btn-md</code>, <code>.btn-lg</code></td></tr>
+      <tr><td>Tokens</td><td>Category-property: <code>--color-brand-navy</code>, <code>--space-md</code>, <code>--radius-md</code></td></tr>
+    </table>
+  </div>
+
+  <div class="ds-card">
+    <div class="ds-card-title">Service Theme Application</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+      <div>
+        <h4 style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--blue)">GaaS (Consulting)</h4>
+        <pre class="code-block"><code>/* GaaS theme scope */
+.gaas-theme {
+  --theme-primary: var(--blue);
+  --theme-accent: var(--orange);
+  --theme-bg: rgba(0,116,228,0.04);
+}
+
+/* Never mix with GPaaS colors */
+/* ✗ Don't use purple/green here */</code></pre>
+      </div>
+      <div>
+        <h4 style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--purple)">GPaaS (Platform)</h4>
+        <pre class="code-block"><code>/* GPaaS theme scope */
+.gpaas-theme {
+  --theme-primary: var(--purple);
+  --theme-accent: var(--green);
+  --theme-bg: rgba(108,92,231,0.04);
+}
+
+/* Never mix with GaaS colors */
+/* ✗ Don't use blue/orange here */</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-card">
+    <div class="ds-card-title">Accessibility Checklist</div>
+    <div style="margin-top:12px;font-size:13px;line-height:1.8;color:var(--navy-70)">
+      <div>&#9745; All interactive elements have visible focus indicators (<code>2px solid var(--blue)</code>)</div>
+      <div>&#9745; Color is never the sole means of conveying information</div>
+      <div>&#9745; Text contrast meets WCAG AA: 4.5:1 for body, 3:1 for large text</div>
+      <div>&#9745; All images have descriptive <code>alt</code> text</div>
+      <div>&#9745; Form fields have associated <code>&lt;label&gt;</code> elements</div>
+      <div>&#9745; ARIA roles and attributes match WAI-ARIA patterns</div>
+      <div>&#9745; Keyboard navigation follows logical tab order</div>
+      <div>&#9745; Motion respects <code>prefers-reduced-motion</code></div>
+      <div>&#9745; Touch targets are minimum 44×44px on mobile</div>
+      <div>&#9745; Error messages are programmatically associated via <code>aria-describedby</code></div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+(function() {
+  const navItems = document.querySelectorAll('.nav-item');
+  const sections = document.querySelectorAll('.ds-section');
+
+  function showSection(sectionId) {
+    sections.forEach(s => {
+      s.style.display = s.id === sectionId ? 'block' : 'none';
+    });
+    navItems.forEach(n => {
+      n.classList.toggle('active', n.dataset.section === sectionId);
+    });
+    document.querySelector('.ds-main').scrollTop = 0;
+  }
+
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      showSection(item.dataset.section);
+    });
+  });
+
+  // Show overview by default
+  showSection('overview');
+
+  // Toggle switch demo
+  document.querySelectorAll('.toggle').forEach(toggle => {
+    if (!toggle.classList.contains('disabled')) {
+      toggle.addEventListener('click', () => {
+        toggle.classList.toggle('active');
+        toggle.setAttribute('aria-checked', toggle.classList.contains('active'));
+      });
+    }
+  });
+
+  // Tab demo
+  document.querySelectorAll('.tab-item').forEach(tab => {
+    tab.addEventListener('click', () => {
+      tab.parentElement.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+
+  // Modal demo
+  const modalOverlay = document.querySelector('.modal-overlay');
+  if (modalOverlay) {
+    document.querySelectorAll('[onclick]').forEach(el => el.removeAttribute('onclick'));
+    const openBtn = document.querySelector('.modal-trigger');
+    const closeBtn = modalOverlay.querySelector('.modal-close');
+    const cancelBtn = modalOverlay.querySelector('.btn-secondary');
+    if (openBtn) openBtn.addEventListener('click', () => modalOverlay.style.display = 'flex');
+    if (closeBtn) closeBtn.addEventListener('click', () => modalOverlay.style.display = 'none');
+    if (cancelBtn) cancelBtn.addEventListener('click', () => modalOverlay.style.display = 'none');
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) modalOverlay.style.display = 'none';
+    });
+  }
+})();
+</script>
+</body>
+</html>
