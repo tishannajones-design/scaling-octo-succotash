@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RGX-Engage Document Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand Colors */
+  --navy: #001f3f;
+  --blue: #0074e4;
+  --blue-hover: #005bb5;
+  --blue-light: #e8f2fc;
+  --blue-border: #b3d4f7;
+  --grey-dark: #292627;
+  --grey-light: #F7F7F7;
+  --white: #ffffff;
+  /* Accent Colors */
+  --orange: #f15a24;
+  --orange-dark: #c44a1e;
+  --orange-light: #fef0eb;
+  --green: #00b859;
+  --green-dark: #007a3d;
+  --green-light: #e6f9ef;
+  --purple: #6c5ce7;
+  --yellow: #f8bf00;
+  --red: #d32f2f;
+  --red-light: #fdeaea;
+  /* Dark Mode */
+  --dark-bg: #0a0f1a;
+  --dark-surface: #141b2d;
+  --dark-elevated: #1e2940;
+  --dark-border: #2e3f63;
+  --dark-text: #f0f2f5;
+  --dark-text-secondary: #a0aec0;
+  /* Typography */
+  --font-display: 'Montserrat', sans-serif;
+  --font-body: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  /* Spacing */
+  --sp-4xs: 4px; --sp-3xs: 6px; --sp-2xs: 8px; --sp-xs: 12px;
+  --sp-sm: 16px; --sp-md: 20px; --sp-lg: 24px; --sp-xl: 32px;
+  --sp-2xl: 40px; --sp-3xl: 48px; --sp-4xl: 64px;
+  /* Radius */
+  --radius-sm: 4px; --radius-md: 6px; --radius-lg: 8px; --radius-xl: 12px;
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  color: var(--grey-dark);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+/* Navigation */
+.nav {
+  position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
+  background: var(--navy); color: var(--white); padding: var(--sp-lg);
+  overflow-y: auto; z-index: 100;
+}
+.nav h2 { font-family: var(--font-display); font-size: 14px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px; color: var(--blue);
+  margin: var(--sp-lg) 0 var(--sp-xs); }
+.nav a { display: block; color: rgba(255,255,255,0.7); text-decoration: none;
+  font-size: 13px; padding: 5px 0; transition: color 0.2s; }
+.nav a:hover { color: var(--white); }
+.nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 18px;
+  color: var(--white); margin-bottom: var(--sp-xl); padding-bottom: var(--sp-sm);
+  border-bottom: 2px solid var(--blue); }
+.nav-logo span { color: var(--blue); }
+/* Main content */
+.main { margin-left: 260px; }
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #003366 50%, var(--blue) 100%);
+  color: var(--white); padding: var(--sp-4xl) var(--sp-3xl);
+  min-height: 320px; display: flex; flex-direction: column; justify-content: center;
+}
+.hero h1 { font-family: var(--font-display); font-size: 42px; font-weight: 800;
+  line-height: 1.1; letter-spacing: -0.5px; margin-bottom: var(--sp-sm); }
+.hero .subtitle { font-size: 20px; font-weight: 300; opacity: 0.9; max-width: 600px; }
+.hero .badge { display: inline-block; background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3); border-radius: 20px;
+  padding: 4px 16px; font-size: 12px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--sp-lg); }
+/* Sections */
+.section { padding: var(--sp-3xl) var(--sp-3xl); max-width: 1100px; }
+.section-alt { background: var(--grey-light); }
+.section h2 {
+  font-family: var(--font-display); font-size: 28px; font-weight: 700;
+  color: var(--navy); margin-bottom: var(--sp-lg);
+  padding-bottom: var(--sp-xs); border-bottom: 3px solid var(--blue);
+}
+.section h3 {
+  font-family: var(--font-display); font-size: 20px; font-weight: 600;
+  color: var(--blue); margin: var(--sp-xl) 0 var(--sp-sm);
+}
+.section h4 {
+  font-family: var(--font-display); font-size: 16px; font-weight: 600;
+  color: var(--grey-dark); margin: var(--sp-lg) 0 var(--sp-xs);
+}
+.section p { margin-bottom: var(--sp-sm); max-width: 780px; }
+/* Color swatches */
+.color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--sp-sm); margin: var(--sp-lg) 0; }
+.swatch {
+  border-radius: var(--radius-lg); overflow: hidden;
+  box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.08);
+}
+.swatch-color { height: 80px; display: flex; align-items: flex-end; padding: var(--sp-2xs) var(--sp-xs); }
+.swatch-color span { font-family: var(--font-mono); font-size: 12px; font-weight: 500; }
+.swatch-info { padding: var(--sp-xs); background: var(--white); }
+.swatch-info .name { font-family: var(--font-display); font-weight: 600; font-size: 13px; }
+.swatch-info .desc { font-size: 12px; color: #666; margin-top: 2px; }
+.swatch-info .usage { font-size: 11px; color: var(--blue); margin-top: 4px; font-weight: 500; }
+/* Typography specimens */
+.type-specimen {
+  background: var(--white); border-radius: var(--radius-lg);
+  padding: var(--sp-lg); margin: var(--sp-sm) 0;
+  box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.06);
+}
+.type-specimen .label {
+  font-family: var(--font-mono); font-size: 11px; color: var(--blue);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--sp-2xs);
+}
+.type-specimen .meta {
+  font-family: var(--font-mono); font-size: 11px; color: #999;
+  margin-top: var(--sp-2xs);
+}
+/* Tables */
+.spec-table { width: 100%; border-collapse: collapse; margin: var(--sp-lg) 0;
+  font-size: 14px; }
+.spec-table th { background: var(--navy); color: var(--white);
+  font-family: var(--font-display); font-weight: 600; font-size: 12px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  padding: var(--sp-xs) var(--sp-sm); text-align: left; }
+.spec-table td { padding: var(--sp-xs) var(--sp-sm); border-bottom: 1px solid #eee; }
+.spec-table tr:nth-child(even) td { background: var(--grey-light); }
+.spec-table code { font-family: var(--font-mono); font-size: 12px;
+  background: #f0f0f0; padding: 2px 6px; border-radius: 3px; }
+/* Code blocks */
+.code-block {
+  background: #1e1e2e; color: #cdd6f4; border-radius: var(--radius-lg);
+  padding: var(--sp-lg); margin: var(--sp-sm) 0; overflow-x: auto;
+  font-family: var(--font-mono); font-size: 13px; line-height: 1.6;
+}
+.code-block .comment { color: #6c7086; }
+.code-block .string { color: #a6e3a1; }
+.code-block .keyword { color: #cba6f7; }
+.code-block .prop { color: #89b4fa; }
+.code-block .value { color: #fab387; }
+/* Cards */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--sp-lg); margin: var(--sp-lg) 0; }
+.card {
+  background: var(--white); border-radius: var(--radius-xl);
+  padding: var(--sp-lg); box-shadow: var(--shadow-md);
+  border-top: 4px solid var(--blue);
+}
+.card.orange { border-top-color: var(--orange); }
+.card.green { border-top-color: var(--green); }
+.card.purple { border-top-color: var(--purple); }
+.card.navy { border-top-color: var(--navy); }
+.card h4 { font-family: var(--font-display); font-size: 16px; font-weight: 700;
+  color: var(--navy); margin-bottom: var(--sp-xs); }
+.card p { font-size: 14px; color: #555; }
+.card ul { font-size: 13px; color: #555; padding-left: var(--sp-lg); margin-top: var(--sp-xs); }
+.card li { margin-bottom: 4px; }
+/* Callout */
+.callout {
+  background: var(--blue-light); border-left: 4px solid var(--blue);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: var(--sp-sm) var(--sp-lg); margin: var(--sp-lg) 0;
+}
+.callout.warning { background: var(--orange-light); border-left-color: var(--orange); }
+.callout.success { background: var(--green-light); border-left-color: var(--green); }
+.callout strong { font-family: var(--font-display); }
+/* Document preview */
+.doc-preview {
+  background: var(--white); border: 1px solid #ddd; border-radius: var(--radius-lg);
+  padding: var(--sp-xl); margin: var(--sp-lg) 0; box-shadow: var(--shadow-md);
+  max-width: 680px;
+}
+.doc-preview .doc-header { text-align: right; font-size: 10px; color: #666;
+  font-style: italic; margin-bottom: var(--sp-lg); padding-bottom: var(--sp-xs);
+  border-bottom: 1px solid #eee; }
+.doc-preview .doc-h1 { font-family: var(--font-display); font-size: 20px;
+  font-weight: 700; color: var(--navy); margin-bottom: var(--sp-sm); }
+.doc-preview .doc-h2 { font-family: var(--font-display); font-size: 16px;
+  font-weight: 700; color: var(--blue); margin: var(--sp-lg) 0 var(--sp-xs); }
+.doc-preview .doc-h3 { font-family: var(--font-display); font-size: 14px;
+  font-weight: 600; color: var(--purple); margin: var(--sp-sm) 0 var(--sp-2xs); }
+.doc-preview .doc-body { font-family: var(--font-body); font-size: 12px;
+  color: var(--grey-dark); line-height: 1.6; margin-bottom: var(--sp-xs); }
+.doc-preview .doc-callout { background: var(--grey-light);
+  border-left: 3px solid var(--blue); padding: var(--sp-xs) var(--sp-sm);
+  font-size: 12px; margin: var(--sp-sm) 0; border-radius: 0 4px 4px 0; }
+.doc-preview .doc-footer { text-align: center; font-size: 10px; color: #666;
+  margin-top: var(--sp-xl); padding-top: var(--sp-xs); border-top: 1px solid #eee; }
+/* Spacing demo */
+.spacing-demo { display: flex; flex-wrap: wrap; gap: var(--sp-sm); margin: var(--sp-lg) 0; }
+.spacing-item { display: flex; align-items: center; gap: var(--sp-xs); }
+.spacing-bar { background: var(--blue); border-radius: 2px; height: 20px; }
+.spacing-label { font-family: var(--font-mono); font-size: 11px; color: #666; white-space: nowrap; }
+/* Do/Don't */
+.do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-lg); margin: var(--sp-lg) 0; }
+.do-box, .dont-box { border-radius: var(--radius-lg); padding: var(--sp-lg); }
+.do-box { background: var(--green-light); border: 2px solid var(--green); }
+.dont-box { background: var(--red-light); border: 2px solid var(--red); }
+.do-box h4 { color: var(--green-dark); }
+.dont-box h4 { color: var(--red); }
+.do-box li, .dont-box li { font-size: 13px; margin-bottom: 4px; }
+/* Template structure */
+.template-structure {
+  background: var(--grey-light); border-radius: var(--radius-lg);
+  padding: var(--sp-lg); margin: var(--sp-sm) 0;
+  border: 1px solid #e0e0e0; font-size: 13px;
+}
+.template-structure .step { display: flex; gap: var(--sp-sm); margin-bottom: var(--sp-xs);
+  align-items: flex-start; }
+.template-structure .step-num { background: var(--blue); color: var(--white);
+  width: 24px; height: 24px; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center; font-size: 12px;
+  font-weight: 700; flex-shrink: 0; font-family: var(--font-display); }
+.template-structure .step-content b { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-logo">RGX<span>-Engage</span><br><small style="font-size:11px;font-weight:400;opacity:0.7">Document Design System</small></div>
+  
+  <h2>Foundation</h2>
+  <a href="#colors">Color Palette</a>
+  <a href="#typography">Typography</a>
+  <a href="#spacing">Spacing & Layout</a>
+  
+  <h2>Document Specs</h2>
+  <a href="#page-setup">Page Setup</a>
+  <a href="#heading-styles">Heading Hierarchy</a>
+  <a href="#body-styles">Body Text Styles</a>
+  <a href="#lists">Lists & Bullets</a>
+  <a href="#tables">Tables</a>
+  <a href="#callouts">Callouts & Quotes</a>
+  <a href="#headers-footers">Headers & Footers</a>
+  
+  <h2>Templates</h2>
+  <a href="#cover-pages">Cover Pages</a>
+  <a href="#governance-report">Governance Reports</a>
+  <a href="#proposals">Client Proposals</a>
+  <a href="#ieef-docs">IEEF Documentation</a>
+  <a href="#memos">Internal Memos</a>
+  <a href="#analysis">Analysis Reports</a>
+  
+  <h2>Brand Voice</h2>
+  <a href="#voice">Voice & Tone</a>
+  <a href="#terminology">Terminology</a>
+  
+  <h2>Implementation</h2>
+  <a href="#docx-js">docx-js Reference</a>
+  <a href="#naming">File Naming</a>
+  <a href="#accessibility">Accessibility</a>
+  <a href="#checklist">Quality Checklist</a>
+</nav>
+
+<!-- Main Content -->
+<div class="main">
+
+<!-- Hero -->
+<section class="hero">
+  <div class="badge">Document Design System v1.0</div>
+  <h1>RGX-Engage<br>Document Design System</h1>
+  <p class="subtitle">Comprehensive specifications for creating professional, brand-compliant documents. From governance reports to client proposals — every document reflects information-enabled excellence.</p>
+</section>
+
+<!-- ===== COLORS ===== -->
+<section class="section" id="colors">
+  <h2>Color Palette</h2>
+  <p>The RGX-Engage color system communicates trust, intelligence, and execution. Every document uses these colors consistently to reinforce brand recognition.</p>
+  
+  <h3>Primary Brand Colors</h3>
+  <div class="color-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#001f3f"><span style="color:#fff">#001f3f</span></div>
+      <div class="swatch-info"><div class="name">Strategic Navy</div><div class="desc">Information intelligence, trusted expertise</div><div class="usage">H1 headers, cover pages, trust elements</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#0074e4"><span style="color:#fff">#0074e4</span></div>
+      <div class="swatch-info"><div class="name">Flow Blue</div><div class="desc">Information optimization, digital transformation</div><div class="usage">H2 headers, CTAs, links, interactive elements</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#292627"><span style="color:#fff">#292627</span></div>
+      <div class="swatch-info"><div class="name">Context Grey</div><div class="desc">Organizational maturity, scalable foundation</div><div class="usage">All body text, paragraphs, descriptions</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#F7F7F7;border:1px solid #e0e0e0"><span style="color:#666">#F7F7F7</span></div>
+      <div class="swatch-info"><div class="name">Framework Grey</div><div class="desc">Clean foundation, organized structure</div><div class="usage">Section backgrounds, table alternate rows</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#ffffff;border:1px solid #e0e0e0"><span style="color:#666">#ffffff</span></div>
+      <div class="swatch-info"><div class="name">Clarity White</div><div class="desc">Information accessibility, transparency</div><div class="usage">Primary canvas, card backgrounds</div></div>
+    </div>
+  </div>
+
+  <h3>Accent Colors</h3>
+  <div class="color-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#f15a24"><span style="color:#fff">#f15a24</span></div>
+      <div class="swatch-info"><div class="name">Execution Orange</div><div class="desc">GaaS accent — energy, action, implementation</div><div class="usage">Action buttons, GaaS highlights, callouts</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#00b859"><span style="color:#fff">#00b859</span></div>
+      <div class="swatch-info"><div class="name">Growth Green</div><div class="desc">GPaaS accent — progress, optimization</div><div class="usage">Success indicators, positive metrics</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#6c5ce7"><span style="color:#fff">#6c5ce7</span></div>
+      <div class="swatch-info"><div class="name">Intelligence Purple</div><div class="desc">GPaaS primary — sophistication, insight</div><div class="usage">H3/H4 subheadings, IEEF elements, framework refs</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#f8bf00"><span style="color:#333">#f8bf00</span></div>
+      <div class="swatch-info"><div class="name">Clarity Yellow</div><div class="desc">Breakthrough, illumination, discovery</div><div class="usage">Key highlights only (use sparingly)</div></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#d32f2f"><span style="color:#fff">#d32f2f</span></div>
+      <div class="swatch-info"><div class="name">Impact Red</div><div class="desc">Urgency, critical action</div><div class="usage">Error messages, critical alerts, risk indicators</div></div>
+    </div>
+  </div>
+
+  <h3>Service-Specific Color Pairings</h3>
+  <div class="card-grid">
+    <div class="card">
+      <h4 style="color:var(--blue)">GaaS Color System</h4>
+      <p>Flow Blue + Execution Orange — action-oriented consulting and implementation expertise.</p>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <div style="width:50%;height:40px;background:var(--blue);border-radius:6px"></div>
+        <div style="width:50%;height:40px;background:var(--orange);border-radius:6px"></div>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4 style="color:var(--purple)">GPaaS Color System</h4>
+      <p>Intelligence Purple + Growth Green — sophisticated technology that continuously evolves.</p>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <div style="width:50%;height:40px;background:var(--purple);border-radius:6px"></div>
+        <div style="width:50%;height:40px;background:var(--green);border-radius:6px"></div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Document Color Rules</h3>
+  <table class="spec-table">
+    <thead><tr><th>Element</th><th>Color</th><th>Hex</th><th>docx-js Code</th></tr></thead>
+    <tbody>
+      <tr><td>H1 Main Headers</td><td>Strategic Navy</td><td>#001f3f</td><td><code>"001f3f"</code></td></tr>
+      <tr><td>H2 Section Headers</td><td>Flow Blue</td><td>#0074e4</td><td><code>"0074e4"</code></td></tr>
+      <tr><td>H3/H4 Subheadings</td><td>Intelligence Purple or Context Grey</td><td>#6c5ce7 / #292627</td><td><code>"6c5ce7"</code> / <code>"292627"</code></td></tr>
+      <tr><td>Body Text</td><td>Context Grey</td><td>#292627</td><td><code>"292627"</code></td></tr>
+      <tr><td>Callout Backgrounds</td><td>Framework Grey</td><td>#F7F7F7</td><td><code>"F7F7F7"</code></td></tr>
+      <tr><td>Callout Left Border</td><td>Flow Blue or Intelligence Purple</td><td>#0074e4 / #6c5ce7</td><td><code>"0074e4"</code></td></tr>
+      <tr><td>Table Header Row</td><td>Strategic Navy bg, White text</td><td>#001f3f / #ffffff</td><td><code>"001f3f"</code></td></tr>
+      <tr><td>Table Alternate Rows</td><td>Framework Grey</td><td>#F7F7F7</td><td><code>"F7F7F7"</code></td></tr>
+      <tr><td>Header Text</td><td>Medium Grey</td><td>#666666</td><td><code>"666666"</code></td></tr>
+      <tr><td>Page Footer</td><td>Context Grey</td><td>#292627</td><td><code>"292627"</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===== TYPOGRAPHY ===== -->
+<section class="section section-alt" id="typography">
+  <h2>Typography</h2>
+  
+  <div class="callout">
+    <strong>Document Typography Note:</strong> For printed and Word documents, RGX-Engage uses <strong>Source Sans Pro</strong> (or Source Sans 3) as the body typeface instead of Inter. Inter remains the UI/web typeface. Montserrat is used for all headings across both contexts.
+  </div>
+  
+  <h3>Font Families</h3>
+  <div class="card-grid">
+    <div class="card navy">
+      <h4>Montserrat — Display & Headings</h4>
+      <p style="font-family:var(--font-display);font-size:24px;font-weight:700;color:var(--navy);margin:12px 0">Information-Enabled Governance</p>
+      <p>Weights: Regular (400), Medium (500), SemiBold (600), Bold (700), ExtraBold (800)</p>
+      <p style="font-size:12px;color:var(--blue);font-weight:600;margin-top:8px">Used for: H1, H2, H3, H4, cover titles, brand statements</p>
+    </div>
+    <div class="card">
+      <h4>Source Sans Pro — Document Body</h4>
+      <p style="font-family:var(--font-body);font-size:16px;font-weight:400;color:var(--grey-dark);margin:12px 0">Context-appropriate governance scales with organizational maturity, delivering measurable outcomes.</p>
+      <p>Weights: Light (300), Regular (400), Medium (500), SemiBold (600), Bold (700)</p>
+      <p style="font-size:12px;color:var(--blue);font-weight:600;margin-top:8px">Used for: Body paragraphs, lists, captions, footnotes, table data</p>
+    </div>
+    <div class="card green">
+      <h4>JetBrains Mono — Code & Data</h4>
+      <p style="font-family:var(--font-mono);font-size:14px;color:var(--grey-dark);margin:12px 0">IEEF.v2.1 | T-S4-BUS-INT-001</p>
+      <p>Weights: Regular (400), Medium (500)</p>
+      <p style="font-size:12px;color:var(--blue);font-weight:600;margin-top:8px">Used for: Document IDs, code references, data labels, monospaced content</p>
+    </div>
+  </div>
+
+  <h3>Heading Scale</h3>
+  
+  <div class="type-specimen">
+    <div class="label">H1 — Main Document Headers</div>
+    <div style="font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--navy);line-height:1.2;letter-spacing:-0.3px">Information-Enabled Governance Assessment</div>
+    <div class="meta">Montserrat Bold (700) · 16pt (32 half-pts) · Strategic Navy #001f3f · Spacing: 12pt before/after · Line height: 1.2</div>
+  </div>
+  
+  <div class="type-specimen">
+    <div class="label">H2 — Section Headers</div>
+    <div style="font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--blue);line-height:1.25;letter-spacing:-0.2px">Current State Analysis</div>
+    <div class="meta">Montserrat Bold (700) · 14pt (28 half-pts) · Flow Blue #0074e4 · Spacing: 9pt before/after · Line height: 1.25</div>
+  </div>
+  
+  <div class="type-specimen">
+    <div class="label">H3 — Subsection Headers</div>
+    <div style="font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--purple);line-height:1.3">IEEF.v2.1 Methodology Application</div>
+    <div class="meta">Montserrat SemiBold (600) · 12pt (24 half-pts) · Intelligence Purple #6c5ce7 or Context Grey #292627 · Spacing: 6pt before/after</div>
+  </div>
+  
+  <div class="type-specimen">
+    <div class="label">H4 — Detail Headers</div>
+    <div style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--grey-dark);line-height:1.35">Business Governance Domain</div>
+    <div class="meta">Montserrat SemiBold (600) · 11pt (22 half-pts) · Context Grey #292627 · Spacing: 4pt before/after</div>
+  </div>
+
+  <h3>Body Text Scale</h3>
+
+  <div class="type-specimen">
+    <div class="label">Lead / Executive Text</div>
+    <div style="font-family:var(--font-body);font-size:18px;font-weight:500;color:var(--grey-dark);line-height:1.5">This assessment reveals how information-enabled governance can reduce decision-making time by 40% while improving strategic alignment across business units.</div>
+    <div class="meta">Source Sans Pro Medium (500) · 14pt (28 half-pts) · Context Grey #292627 · Line height: 1.5</div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="label">Body — Standard</div>
+    <div style="font-family:var(--font-body);font-size:16px;font-weight:400;color:var(--grey-dark);line-height:1.5">RGX-Engage delivers information-enabled governance that scales with your business. Through our IEEF.v2.1 methodology, we provide context-appropriate frameworks that match organizational maturity, avoiding premature complexity while ensuring growth readiness.</div>
+    <div class="meta">Source Sans Pro Regular (400) · 12pt (24 half-pts) · Context Grey #292627 · Line height: 1.5 · Line spacing: 360 (docx)</div>
+  </div>
+  
+  <div class="type-specimen">
+    <div class="label">Small Body / Captions</div>
+    <div style="font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--grey-dark);line-height:1.4">Figure 1: Governance maturity progression across evolutionary contexts</div>
+    <div class="meta">Source Sans Pro Regular (400) · 10pt (20 half-pts) · Context Grey #292627 · Line height: 1.4</div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="label">Footer / Header Text</div>
+    <div style="font-family:var(--font-body);font-size:13px;font-weight:400;color:#666;font-style:italic">IEEF v2.1 | Governance-Assessment</div>
+    <div class="meta">Source Sans Pro Regular (400) Italic · 10pt (20 half-pts) · #666666 · Right-aligned (header) / Center-aligned (footer)</div>
+  </div>
+  
+  <h3>Font Size Conversion (docx-js uses half-points)</h3>
+  <table class="spec-table">
+    <thead><tr><th>Size (pt)</th><th>docx-js Value</th><th>Usage</th><th>Font</th></tr></thead>
+    <tbody>
+      <tr><td>20pt</td><td>40</td><td>Cover page title</td><td>Montserrat Bold</td></tr>
+      <tr><td>16pt</td><td>32</td><td>H1 Main Headers</td><td>Montserrat Bold</td></tr>
+      <tr><td>14pt</td><td>28</td><td>H2 Section Headers / Lead text</td><td>Montserrat Bold / Source Sans Pro</td></tr>
+      <tr><td>12pt</td><td>24</td><td>H3 Subsections / Standard body</td><td>Montserrat SemiBold / Source Sans Pro</td></tr>
+      <tr><td>11pt</td><td>22</td><td>H4 Detail headers</td><td>Montserrat SemiBold</td></tr>
+      <tr><td>10pt</td><td>20</td><td>Small body, captions, headers/footers</td><td>Source Sans Pro</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===== SPACING ===== -->
+<section class="section" id="spacing">
+  <h2>Spacing & Layout</h2>
+  
+  <h3>Page Setup</h3>
+  <table class="spec-table" id="page-setup">
+    <thead><tr><th>Property</th><th>Value</th><th>DXA Units</th></tr></thead>
+    <tbody>
+      <tr><td>Page Size</td><td>US Letter (8.5" x 11")</td><td>12,240 x 15,840</td></tr>
+      <tr><td>All Margins</td><td>1 inch</td><td>1,440</td></tr>
+      <tr><td>Content Width</td><td>6.5 inches</td><td>9,360</td></tr>
+      <tr><td>Content Height</td><td>9 inches</td><td>12,960</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Paragraph Spacing</h3>
+  <table class="spec-table">
+    <thead><tr><th>Element</th><th>Before (pt)</th><th>After (pt)</th><th>DXA Before</th><th>DXA After</th><th>Line Spacing</th></tr></thead>
+    <tbody>
+      <tr><td>H1</td><td>12pt</td><td>12pt</td><td>240</td><td>240</td><td>1.2 (single)</td></tr>
+      <tr><td>H2</td><td>9pt</td><td>9pt</td><td>180</td><td>180</td><td>1.25</td></tr>
+      <tr><td>H3</td><td>6pt</td><td>6pt</td><td>120</td><td>120</td><td>1.3</td></tr>
+      <tr><td>H4</td><td>4pt</td><td>4pt</td><td>80</td><td>80</td><td>1.35</td></tr>
+      <tr><td>Body</td><td>0</td><td>6pt</td><td>0</td><td>120</td><td>1.5 (360 DXA)</td></tr>
+      <tr><td>List Item</td><td>0</td><td>3pt</td><td>0</td><td>60</td><td>1.15</td></tr>
+      <tr><td>Caption</td><td>3pt</td><td>6pt</td><td>60</td><td>120</td><td>1.4</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Spacing Scale</h3>
+  <div class="spacing-demo">
+    <div class="spacing-item"><div class="spacing-bar" style="width:4px"></div><div class="spacing-label">4xs: 4px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="width:8px"></div><div class="spacing-label">2xs: 8px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="width:12px"></div><div class="spacing-label">xs: 12px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="width:16px"></div><div class="spacing-label">sm: 16px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="width:20px"></div><div class="spacing-label">md: 20px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="width:24px"></div><div class="spacing-label">lg: 24px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="width:32px"></div><div class="spacing-label">xl: 32px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="width:48px"></div><div class="spacing-label">3xl: 48px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="width:64px"></div><div class="spacing-label">4xl: 64px</div></div>
+  </div>
+</section>
+
+<!-- ===== HEADING STYLES ===== -->
+<section class="section section-alt" id="heading-styles">
+  <h2>Heading Hierarchy</h2>
+  <p>Documents use a clear visual hierarchy with alternating colors to create rhythm. Odd-numbered major sections use Strategic Navy; even-numbered sections can alternate with Flow Blue to prevent visual monotony.</p>
+
+  <div class="doc-preview">
+    <div class="doc-header">IEEF v2.1 | Governance-Assessment</div>
+    <div class="doc-h1">1. Executive Summary</div>
+    <div class="doc-body">This assessment reveals how information-enabled governance can reduce decision-making time by 40% while improving strategic alignment across business units.</div>
+    <div class="doc-h2">1.1 Assessment Overview</div>
+    <div class="doc-body">The IEEF.v2.1 maturity assessment was conducted over a four-week period, covering business governance, IT governance, and information governance domains.</div>
+    <div class="doc-h3">1.1.1 Methodology Application</div>
+    <div class="doc-body">Using the 4C Decomposition Framework (Context, Containers, Components, Code), each domain was evaluated against maturity benchmarks appropriate to the organizational evolutionary context.</div>
+    <div style="font-family:var(--font-display);font-size:13px;font-weight:600;color:var(--grey-dark);margin:12px 0 6px">Business Governance Domain</div>
+    <div class="doc-body">Current maturity: Level 3 (Defined). Target maturity: Level 4 (Managed).</div>
+    <div class="doc-callout"><strong style="color:var(--blue)">Key Finding:</strong> Information flow between business units shows 40% inefficiency due to siloed governance structures.</div>
+    <div class="doc-footer">Page 3 of 24</div>
+  </div>
+</section>
+
+<!-- ===== BODY STYLES ===== -->
+<section class="section" id="body-styles">
+  <h2>Body Text Styles</h2>
+  
+  <h3>Text Emphasis</h3>
+  <table class="spec-table">
+    <thead><tr><th>Style</th><th>Font</th><th>Weight</th><th>Usage</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Bold</strong></td><td>Source Sans Pro</td><td>700 (Bold)</td><td>Key terms, important phrases, metric values</td></tr>
+      <tr><td><em>Italic</em></td><td>Source Sans Pro</td><td>400 (Italic)</td><td>Definitions, references, technical terms on first use</td></tr>
+      <tr><td>Bold + Color</td><td>Source Sans Pro</td><td>700 in Flow Blue</td><td>Inline emphasis for brand terms (sparingly)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout warning">
+    <strong>Important:</strong> Never use underline for emphasis in documents — reserve underline exclusively for hyperlinks. Never use all caps except for short labels or acronyms (e.g., IEEF, GaaS, AISO).
+  </div>
+</section>
+
+<!-- ===== LISTS ===== -->
+<section class="section section-alt" id="lists">
+  <h2>Lists & Bullets</h2>
+  <p>Always use proper numbering configuration in docx-js. Never insert unicode bullet characters manually.</p>
+
+  <table class="spec-table">
+    <thead><tr><th>List Type</th><th>Indent (Left)</th><th>Hanging</th><th>Font</th><th>Spacing After</th></tr></thead>
+    <tbody>
+      <tr><td>Level 0 Bullet</td><td>720 DXA (0.5")</td><td>360 DXA</td><td>Source Sans Pro 12pt</td><td>3pt (60 DXA)</td></tr>
+      <tr><td>Level 1 Bullet</td><td>1440 DXA (1.0")</td><td>360 DXA</td><td>Source Sans Pro 12pt</td><td>3pt</td></tr>
+      <tr><td>Level 0 Numbered</td><td>720 DXA</td><td>360 DXA</td><td>Source Sans Pro 12pt</td><td>3pt</td></tr>
+      <tr><td>Level 1 Numbered</td><td>1440 DXA</td><td>360 DXA</td><td>Source Sans Pro 12pt</td><td>3pt</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===== TABLES ===== -->
+<section class="section" id="tables">
+  <h2>Tables</h2>
+  
+  <h3>Standard Table Styling</h3>
+  <table class="spec-table">
+    <thead><tr><th>Element</th><th>Background</th><th>Text Color</th><th>Font</th><th>Weight</th></tr></thead>
+    <tbody>
+      <tr><td>Header Row</td><td>Strategic Navy (#001f3f)</td><td>White (#ffffff)</td><td>Montserrat</td><td>SemiBold (600)</td></tr>
+      <tr><td>Data Row (odd)</td><td>White (#ffffff)</td><td>Context Grey (#292627)</td><td>Source Sans Pro</td><td>Regular (400)</td></tr>
+      <tr><td>Data Row (even)</td><td>Framework Grey (#F7F7F7)</td><td>Context Grey (#292627)</td><td>Source Sans Pro</td><td>Regular (400)</td></tr>
+      <tr><td>Borders</td><td colspan="4">1px solid #CCCCCC — use <code>ShadingType.CLEAR</code> (never SOLID)</td></tr>
+      <tr><td>Cell Padding</td><td colspan="4">top: 80, bottom: 80, left: 120, right: 120 (DXA)</td></tr>
+    </tbody>
+  </table>
+  
+  <div class="callout warning">
+    <strong>Critical:</strong> Always use <code>WidthType.DXA</code> for table widths — never <code>WidthType.PERCENTAGE</code> (breaks in Google Docs). Full-width table = 9,360 DXA with 1" margins.
+  </div>
+</section>
+
+<!-- ===== CALLOUTS ===== -->
+<section class="section section-alt" id="callouts">
+  <h2>Callouts & Quotes</h2>
+  
+  <h3>Information Callout</h3>
+  <div class="doc-preview" style="max-width:100%">
+    <div class="doc-callout" style="border-left-color:var(--blue)">
+      <strong style="color:var(--blue)">Key Insight:</strong> Organizations at the Team of Teams evolutionary context experience 60% more governance friction when using enterprise-grade frameworks prematurely.
+    </div>
+  </div>
+  <p>Background: Framework Grey (#F7F7F7) · Left border: Flow Blue (#0074e4) · 3px border width</p>
+  
+  <h3>Executive Quote</h3>
+  <div class="doc-preview" style="max-width:100%">
+    <div style="font-family:var(--font-display);font-style:italic;font-size:16px;color:var(--blue);padding:12px 20px;border-left:3px solid var(--blue);background:var(--grey-light);margin:8px 0;border-radius:0 4px 4px 0">
+      "Information-enabled governance that scales with your business."
+    </div>
+  </div>
+  <p>Font: Montserrat Italic 14pt · Color: Flow Blue · Left border: Flow Blue · Background: Framework Grey</p>
+</section>
+
+<!-- ===== HEADERS & FOOTERS ===== -->
+<section class="section" id="headers-footers">
+  <h2>Headers & Footers</h2>
+  
+  <div class="callout">
+    <strong>Required:</strong> All RGX-Engage documents must include both header and footer on every page except the cover page.
+  </div>
+
+  <h3>Header Format by Document Type</h3>
+  <table class="spec-table">
+    <thead><tr><th>Document Type</th><th>Header Text</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>Framework Docs</td><td><code>IEEF v2.1 | Document-ID</code></td><td>IEEF v2.1 | T-S4-BUS-INT-001</td></tr>
+      <tr><td>Governance Reports</td><td><code>IEEF v2.1 | Report-Name</code></td><td>IEEF v2.1 | Maturity-Assessment</td></tr>
+      <tr><td>Client Proposals</td><td><code>RGX-Engage | Proposal-ClientName</code></td><td>RGX-Engage | Proposal-AcmeCorp</td></tr>
+      <tr><td>Internal Documents</td><td><code>RGX-Engage | Document-Name</code></td><td>RGX-Engage | Process-Guide</td></tr>
+    </tbody>
+  </table>
+  <p>Style: Source Sans Pro Regular 10pt, Italic, #666666, Right-aligned</p>
+  
+  <h3>Footer Format (Universal)</h3>
+  <p>All documents: <strong>Page X of Y</strong> — Source Sans Pro Regular 10pt, Context Grey (#292627), Center-aligned</p>
+</section>
+
+<!-- ===== COVER PAGES ===== -->
+<section class="section section-alt" id="cover-pages">
+  <h2>Cover Pages</h2>
+  <p>Cover pages should have no header or footer. Use <code>titlePage: true</code> and empty <code>first</code> headers/footers.</p>
+  
+  <h3>Cover Page Elements</h3>
+  <div class="template-structure">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><b>RGX-Engage Logo</b> — top center or top-left, 200-250px width, maintain aspect ratio. Use <code>noBgColor.png</code></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><b>Document Title</b> — Montserrat Bold 20pt, Strategic Navy, center-aligned, 2-3 inches below logo</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><b>Subtitle/Client Name</b> — Source Sans Pro Medium 14pt, Context Grey or Flow Blue</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><b>Date & Version</b> — Source Sans Pro Regular 12pt, Context Grey, bottom third of page</div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-content"><b>Confidentiality Statement</b> (proposals) — Source Sans Pro Regular 10pt, Context Grey, bottom of page</div></div>
+    <div class="step"><div class="step-num">6</div><div class="step-content"><b>Page Break</b> — always end cover page with a page break</div></div>
+  </div>
+</section>
+
+<!-- ===== GOVERNANCE REPORTS ===== -->
+<section class="section" id="governance-report">
+  <h2>Governance Reports</h2>
+  
+  <div class="template-structure">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><b>Cover Page</b> — Logo, report title, client name, date, version</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><b>Executive Summary</b> (1-2 pages) — Key findings, primary recommendations, expected outcomes, methodology reference</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><b>Table of Contents</b> — Auto-generated from H1-H3, hyperlinked, dot leaders</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><b>Assessment Overview</b> — Background, scope, IEEF.v2.1 methodology, timeline</div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-content"><b>Current State Analysis</b> — Business Governance, IT Governance, Information Governance domains with maturity findings</div></div>
+    <div class="step"><div class="step-num">6</div><div class="step-content"><b>Findings & Recommendations</b> — Each finding with evidence, impact, recommendation, priority</div></div>
+    <div class="step"><div class="step-num">7</div><div class="step-content"><b>Implementation Roadmap</b> — Phased approach, timeline, resources, success metrics</div></div>
+    <div class="step"><div class="step-num">8</div><div class="step-content"><b>Appendices</b> — Assessment data, methodology docs, supporting materials</div></div>
+  </div>
+  <p style="margin-top:12px"><strong>Header:</strong> <code>IEEF v2.1 | Report-Name</code> · <strong>Footer:</strong> Page X of Y</p>
+</section>
+
+<!-- ===== PROPOSALS ===== -->
+<section class="section section-alt" id="proposals">
+  <h2>Client Proposals</h2>
+  
+  <div class="template-structure">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><b>Cover Page</b> — Logo, proposal title, "Prepared for: [Client]", date, confidentiality</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><b>Executive Summary</b> (1 page) — Challenge, proposed solution, expected outcomes, investment summary</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><b>Understanding Your Challenge</b> — Current state, pain points, business impact, urgency</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><b>Proposed Solution</b> — IEEF.v2.1 methodology (Purple accent), GaaS implementation (Orange), GPaaS platform (Green)</div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-content"><b>Approach & Methodology</b> — AISO framework, phases, timeline, deliverables</div></div>
+    <div class="step"><div class="step-num">6</div><div class="step-content"><b>Why RGX-Engage</b> — Differentiators, experience, team, success metrics</div></div>
+    <div class="step"><div class="step-num">7</div><div class="step-content"><b>Timeline & Deliverables</b> — Project plan, milestones, success criteria</div></div>
+    <div class="step"><div class="step-num">8</div><div class="step-content"><b>Investment & ROI</b> — Pricing, payment schedule, expected ROI</div></div>
+    <div class="step"><div class="step-num">9</div><div class="step-content"><b>Next Steps</b> — Decision timeline, getting started, contact, validity period</div></div>
+  </div>
+  <p style="margin-top:12px"><strong>Header:</strong> <code>RGX-Engage | Proposal-ClientName</code> · <strong>Footer:</strong> Page X of Y</p>
+</section>
+
+<!-- ===== IEEF DOCS ===== -->
+<section class="section" id="ieef-docs">
+  <h2>IEEF Framework Documentation</h2>
+  
+  <div class="template-structure">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><b>Cover Page</b> — Logo, "IEEF.v2.1 Framework Guide", "Context-Appropriate Governance"</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><b>Framework Overview</b> — What is IEEF.v2.1, core principles, why context matters</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><b>Three-Dimensional Model</b> — Business Governance (Blue), IT Governance (Blue), Information Governance (Purple)</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><b>Five-Tier Organizational Approach</b> — Enterprise → Business Unit → Product → Application → Infrastructure</div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-content"><b>Evolutionary Contexts</b> (Purple accent) — Individual → Team → Team of Teams → Enduring Enterprise</div></div>
+    <div class="step"><div class="step-num">6</div><div class="step-content"><b>4C Decomposition</b> — Context, Containers, Components, Code</div></div>
+    <div class="step"><div class="step-num">7</div><div class="step-content"><b>Implementation Guide</b> — AISO methodology, assessment, phases, metrics</div></div>
+    <div class="step"><div class="step-num">8</div><div class="step-content"><b>Maturity Assessment Tools</b> — Questionnaires, level definitions, scoring</div></div>
+  </div>
+  <p style="margin-top:12px"><strong>Header:</strong> <code>IEEF v2.1 | Document-ID</code> · <strong>Footer:</strong> Page X of Y</p>
+</section>
+
+<!-- ===== MEMOS ===== -->
+<section class="section section-alt" id="memos">
+  <h2>Internal Memos</h2>
+  <p>Internal memos use a simplified structure — no cover page required.</p>
+  
+  <div class="template-structure">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><b>Logo Header</b> — Small RGX-Engage logo, left-aligned</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><b>"MEMORANDUM"</b> — Montserrat Bold 14pt, Strategic Navy</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><b>Metadata Block</b> — To, From, Date, Re (Subject bold), Source Sans Pro 12pt</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><b>Horizontal Rule</b> — 1px Strategic Navy border below metadata</div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-content"><b>Body Content</b> — Opening context, main content with H2 sections if needed, action items</div></div>
+  </div>
+  <p style="margin-top:12px"><strong>Header:</strong> <code>RGX-Engage | Internal-Memo</code> · <strong>Footer:</strong> single page: "RGX-Engage Internal | Confidential" / multi-page: Page X of Y</p>
+</section>
+
+<!-- ===== ANALYSIS REPORTS ===== -->
+<section class="section" id="analysis">
+  <h2>Analysis Reports</h2>
+  
+  <div class="template-structure">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><b>Cover Page</b> — Logo, report title, analysis scope, date</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><b>Executive Summary</b> — Key findings, primary insights, recommended actions</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><b>Analysis Overview</b> — Objectives, methodology, data sources, scope/limitations</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><b>Findings</b> — H2 per finding (Flow Blue), data, evidence, implications</div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-content"><b>Insights & Recommendations</b> — Strategic insights, actions, priorities</div></div>
+    <div class="step"><div class="step-num">6</div><div class="step-content"><b>Conclusion</b> — Summary, next steps, follow-up</div></div>
+  </div>
+</section>
+
+<!-- ===== VOICE ===== -->
+<section class="section section-alt" id="voice">
+  <h2>Brand Voice & Tone</h2>
+  
+  <h3>Brand Personality</h3>
+  <div class="card-grid">
+    <div class="card navy"><h4>Information-Intelligent</h4><p>Deep understanding of how information enables better decisions. Evidence-based, data-driven language. Authority from expertise.</p></div>
+    <div class="card"><h4>Context-Aware</h4><p>Solutions matched to organizational maturity. Adaptive language that respects where clients are in their journey.</p></div>
+    <div class="card orange"><h4>Execution-Focused</h4><p>Action-oriented, measurable outcomes. Clear pathways from strategy to results. Concrete, implementation-ready.</p></div>
+    <div class="card green"><h4>Human-Centered</h4><p>Governance designed for how teams actually work. Accessible, empowering language. User experience prioritized.</p></div>
+    <div class="card purple"><h4>Continuously Adaptive</h4><p>Forward-thinking, evolving approaches. Learning-oriented. Solutions that grow with the business.</p></div>
+  </div>
+
+  <h3>Tone: Confident, Clear, Insightful, Energizing</h3>
+  <div class="do-dont">
+    <div class="do-box">
+      <h4>Do</h4>
+      <ul>
+        <li>Start with the outcome — what will the reader achieve?</li>
+        <li>Use specific, quantified language: "Reduce decision time by 40%"</li>
+        <li>Lead with benefits, support with evidence</li>
+        <li>Be confident without arrogance</li>
+        <li>Use active voice: "Transform governance friction"</li>
+      </ul>
+    </div>
+    <div class="dont-box">
+      <h4>Don't</h4>
+      <ul>
+        <li>Use vague language: "improve efficiency"</li>
+        <li>Say "solutions" without specifics</li>
+        <li>Use "leverage", "synergy", "disruptive"</li>
+        <li>Say "best practices" (implies one-size-fits-all)</li>
+        <li>Use passive voice or corporate jargon without purpose</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Signature Phrases</h3>
+  <table class="spec-table">
+    <thead><tr><th>Context</th><th>Phrase</th></tr></thead>
+    <tbody>
+      <tr><td>Primary Brand Line</td><td>"Information-enabled governance that scales."</td></tr>
+      <tr><td>Supporting</td><td>"Right information. Right governance. Right growth."</td></tr>
+      <tr><td>Transformation</td><td>"From information chaos to competitive clarity."</td></tr>
+      <tr><td>Growth</td><td>"Context-appropriate governance for sustainable growth."</td></tr>
+      <tr><td>Decision-Making</td><td>"Right information, right people, right time."</td></tr>
+      <tr><td>Implementation</td><td>"From strategy to measurable results."</td></tr>
+      <tr><td>Scaling</td><td>"Growth without governance friction."</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===== TERMINOLOGY ===== -->
+<section class="section" id="terminology">
+  <h2>Terminology Guide</h2>
+  
+  <h3>Preferred Terms</h3>
+  <table class="spec-table">
+    <thead><tr><th>Use This</th><th>Instead Of</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Information-enabled</td><td>"data-driven"</td><td>More comprehensive — includes context, not just data</td></tr>
+      <tr><td>Context-appropriate</td><td>"flexible" or "customizable"</td><td>Emphasizes intentional matching to maturity</td></tr>
+      <tr><td>Optimize</td><td>"improve"</td><td>Implies measurable, systematic enhancement</td></tr>
+      <tr><td>Governance maturity</td><td>"governance level"</td><td>Implies growth journey, not static state</td></tr>
+      <tr><td>Decision intelligence</td><td>"decision support"</td><td>Active enablement vs. passive assistance</td></tr>
+      <tr><td>Evolutionary contexts</td><td>"organizational stages"</td><td>RGX-specific term for growth stages</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===== DOCX-JS REFERENCE ===== -->
+<section class="section section-alt" id="docx-js">
+  <h2>docx-js Implementation Reference</h2>
+  
+  <h3>Complete Document Setup</h3>
+  <div class="code-block">
+<span class="keyword">const</span> { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
+        ImageRun, Header, Footer, AlignmentType, HeadingLevel, LevelFormat,
+        TableOfContents, BorderStyle, WidthType, ShadingType, PageNumber,
+        PageBreak } = <span class="keyword">require</span>(<span class="string">'docx'</span>);
+
+<span class="keyword">const</span> doc = <span class="keyword">new</span> Document({
+  <span class="prop">styles</span>: {
+    <span class="prop">default</span>: {
+      <span class="prop">document</span>: {
+        <span class="prop">run</span>: {
+          <span class="prop">font</span>: <span class="string">"Source Sans Pro"</span>,  <span class="comment">// Document body font</span>
+          <span class="prop">size</span>: <span class="value">24</span>                   <span class="comment">// 12pt default</span>
+        }
+      }
+    },
+    <span class="prop">paragraphStyles</span>: [
+      { <span class="prop">id</span>: <span class="string">"Heading1"</span>, <span class="prop">name</span>: <span class="string">"Heading 1"</span>,
+        <span class="prop">run</span>: { <span class="prop">font</span>: <span class="string">"Montserrat"</span>, <span class="prop">size</span>: <span class="value">32</span>, <span class="prop">bold</span>: <span class="value">true</span>, <span class="prop">color</span>: <span class="string">"001f3f"</span> },
+        <span class="prop">paragraph</span>: { <span class="prop">spacing</span>: { <span class="prop">before</span>: <span class="value">240</span>, <span class="prop">after</span>: <span class="value">240</span> }, <span class="prop">outlineLevel</span>: <span class="value">0</span> } },
+      { <span class="prop">id</span>: <span class="string">"Heading2"</span>, <span class="prop">name</span>: <span class="string">"Heading 2"</span>,
+        <span class="prop">run</span>: { <span class="prop">font</span>: <span class="string">"Montserrat"</span>, <span class="prop">size</span>: <span class="value">28</span>, <span class="prop">bold</span>: <span class="value">true</span>, <span class="prop">color</span>: <span class="string">"0074e4"</span> },
+        <span class="prop">paragraph</span>: { <span class="prop">spacing</span>: { <span class="prop">before</span>: <span class="value">180</span>, <span class="prop">after</span>: <span class="value">180</span> }, <span class="prop">outlineLevel</span>: <span class="value">1</span> } },
+      { <span class="prop">id</span>: <span class="string">"Heading3"</span>, <span class="prop">name</span>: <span class="string">"Heading 3"</span>,
+        <span class="prop">run</span>: { <span class="prop">font</span>: <span class="string">"Montserrat"</span>, <span class="prop">size</span>: <span class="value">24</span>, <span class="prop">color</span>: <span class="string">"6c5ce7"</span> },
+        <span class="prop">paragraph</span>: { <span class="prop">spacing</span>: { <span class="prop">before</span>: <span class="value">120</span>, <span class="prop">after</span>: <span class="value">120</span> }, <span class="prop">outlineLevel</span>: <span class="value">2</span> } },
+    ]
+  },
+  <span class="prop">numbering</span>: {
+    <span class="prop">config</span>: [
+      { <span class="prop">reference</span>: <span class="string">"bullets"</span>,
+        <span class="prop">levels</span>: [{ <span class="prop">level</span>: <span class="value">0</span>, <span class="prop">format</span>: LevelFormat.BULLET, <span class="prop">text</span>: <span class="string">"\u2022"</span>,
+          <span class="prop">alignment</span>: AlignmentType.LEFT,
+          <span class="prop">style</span>: { <span class="prop">paragraph</span>: { <span class="prop">indent</span>: { <span class="prop">left</span>: <span class="value">720</span>, <span class="prop">hanging</span>: <span class="value">360</span> } } } }]
+      },
+    ]
+  },
+  <span class="prop">sections</span>: [{
+    <span class="prop">properties</span>: {
+      <span class="prop">titlePage</span>: <span class="value">true</span>,
+      <span class="prop">page</span>: {
+        <span class="prop">size</span>: { <span class="prop">width</span>: <span class="value">12240</span>, <span class="prop">height</span>: <span class="value">15840</span> },
+        <span class="prop">margin</span>: { <span class="prop">top</span>: <span class="value">1440</span>, <span class="prop">right</span>: <span class="value">1440</span>, <span class="prop">bottom</span>: <span class="value">1440</span>, <span class="prop">left</span>: <span class="value">1440</span> }
+      }
+    },
+    <span class="prop">headers</span>: {
+      <span class="prop">default</span>: <span class="keyword">new</span> Header({ <span class="comment">/* standard header */</span> }),
+      <span class="prop">first</span>: <span class="keyword">new</span> Header({ <span class="prop">children</span>: [] })  <span class="comment">// Empty for cover</span>
+    },
+    <span class="prop">footers</span>: {
+      <span class="prop">default</span>: <span class="keyword">new</span> Footer({ <span class="comment">/* Page X of Y */</span> }),
+      <span class="prop">first</span>: <span class="keyword">new</span> Footer({ <span class="prop">children</span>: [] })  <span class="comment">// Empty for cover</span>
+    },
+    <span class="prop">children</span>: [ <span class="comment">/* document content */</span> ]
+  }]
+});
+  </div>
+
+  <h3>Color Constants</h3>
+  <div class="code-block">
+<span class="comment">// RGX-Engage Document Colors (remove '#' for docx-js)</span>
+<span class="keyword">const</span> COLORS = {
+  <span class="prop">STRATEGIC_NAVY</span>:      <span class="string">"001f3f"</span>,   <span class="comment">// H1, cover titles</span>
+  <span class="prop">FLOW_BLUE</span>:           <span class="string">"0074e4"</span>,   <span class="comment">// H2, links, CTAs</span>
+  <span class="prop">CONTEXT_GREY</span>:        <span class="string">"292627"</span>,   <span class="comment">// Body text</span>
+  <span class="prop">FRAMEWORK_GREY</span>:      <span class="string">"F7F7F7"</span>,   <span class="comment">// Backgrounds, alt rows</span>
+  <span class="prop">INTELLIGENCE_PURPLE</span>: <span class="string">"6c5ce7"</span>,   <span class="comment">// H3, IEEF elements</span>
+  <span class="prop">EXECUTION_ORANGE</span>:    <span class="string">"f15a24"</span>,   <span class="comment">// GaaS accents</span>
+  <span class="prop">GROWTH_GREEN</span>:        <span class="string">"00b859"</span>,   <span class="comment">// Success, GPaaS</span>
+  <span class="prop">CLARITY_YELLOW</span>:      <span class="string">"f8bf00"</span>,   <span class="comment">// Highlights (sparingly)</span>
+  <span class="prop">IMPACT_RED</span>:          <span class="string">"d32f2f"</span>,   <span class="comment">// Errors, alerts</span>
+  <span class="prop">HEADER_GREY</span>:         <span class="string">"666666"</span>,   <span class="comment">// Page headers</span>
+  <span class="prop">TABLE_BORDER</span>:        <span class="string">"CCCCCC"</span>,   <span class="comment">// Table borders</span>
+};
+  </div>
+</section>
+
+<!-- ===== FILE NAMING ===== -->
+<section class="section" id="naming">
+  <h2>File Naming Conventions</h2>
+  
+  <div class="code-block">
+<span class="comment">// Format: [Type]_[Client/Topic]_[YYYYMMDD]_[Version].docx</span>
+
+GovernanceReport_Acme_20260312_v2.docx
+Proposal_TechCorp_20260312_v1.docx
+IEEF_ImplementationGuide_20260312_Final.docx
+Analysis_MarketTrends_20260312_Draft.docx
+Memo_TeamUpdate_20260312.docx
+  </div>
+</section>
+
+<!-- ===== ACCESSIBILITY ===== -->
+<section class="section section-alt" id="accessibility">
+  <h2>Accessibility Requirements</h2>
+  
+  <table class="spec-table">
+    <thead><tr><th>Requirement</th><th>Standard</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr><td>Text Contrast (normal)</td><td>WCAG 2.2 AA</td><td>Minimum 4.5:1 ratio</td></tr>
+      <tr><td>Text Contrast (large 18pt+)</td><td>WCAG 2.2 AA</td><td>Minimum 3:1 ratio</td></tr>
+      <tr><td>Heading Hierarchy</td><td>Sequential</td><td>H1 → H2 → H3, no skipping levels</td></tr>
+      <tr><td>Image Alt Text</td><td>Required</td><td>All images must have alt text with title, description, name</td></tr>
+      <tr><td>Table Headers</td><td>Required</td><td>First row must be marked as header</td></tr>
+      <tr><td>Minimum Font Size</td><td>10pt</td><td>Nothing smaller than 10pt in any document</td></tr>
+      <tr><td>Max Line Length</td><td>75 characters</td><td>For body text readability</td></tr>
+      <tr><td>Color Independence</td><td>Required</td><td>Never rely on color alone to convey information</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Approved Color Combinations</h3>
+  <table class="spec-table">
+    <thead><tr><th>Foreground</th><th>Background</th><th>Contrast</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Strategic Navy</td><td>White</td><td>16.6:1</td><td style="color:var(--green);font-weight:600">Pass</td></tr>
+      <tr><td>Context Grey</td><td>White</td><td>13.2:1</td><td style="color:var(--green);font-weight:600">Pass</td></tr>
+      <tr><td>Flow Blue</td><td>White</td><td>4.7:1</td><td style="color:var(--green);font-weight:600">Pass</td></tr>
+      <tr><td>White</td><td>Strategic Navy</td><td>16.6:1</td><td style="color:var(--green);font-weight:600">Pass</td></tr>
+      <tr><td>White</td><td>Flow Blue</td><td>4.7:1</td><td style="color:var(--green);font-weight:600">Pass</td></tr>
+      <tr><td>Clarity Yellow</td><td>White</td><td>1.6:1</td><td style="color:var(--red);font-weight:600">Fail — never use yellow text on white</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===== CHECKLIST ===== -->
+<section class="section" id="checklist">
+  <h2>Quality Checklist</h2>
+  
+  <h3>Before Finalizing Any Document</h3>
+  <div class="card-grid">
+    <div class="card navy">
+      <h4>Brand Compliance</h4>
+      <ul>
+        <li>Montserrat used for all headings</li>
+        <li>Source Sans Pro used for all body text</li>
+        <li>Colors match approved palette exactly</li>
+        <li>RGX-Engage logo on cover page (reports/proposals)</li>
+        <li>No fonts outside Montserrat + Source Sans Pro</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Document Structure</h4>
+      <ul>
+        <li>Cover page present (reports/proposals)</li>
+        <li>Executive summary included</li>
+        <li>Table of contents for 5+ page docs</li>
+        <li>Header present on all pages (except cover)</li>
+        <li>Footer with page numbers (except cover)</li>
+      </ul>
+    </div>
+    <div class="card green">
+      <h4>Content Quality</h4>
+      <ul>
+        <li>Tone is confident but not arrogant</li>
+        <li>Language is specific and evidence-based</li>
+        <li>Brand terminology used correctly</li>
+        <li>Active voice used where appropriate</li>
+        <li>Call to action is specific and actionable</li>
+      </ul>
+    </div>
+    <div class="card purple">
+      <h4>Accessibility</h4>
+      <ul>
+        <li>Heading hierarchy is sequential</li>
+        <li>All images have alt text</li>
+        <li>Sufficient color contrast</li>
+        <li>Minimum 10pt font size</li>
+        <li>No color-only information</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="background:var(--navy);color:var(--white);padding:var(--sp-3xl) var(--sp-3xl);margin-left:0">
+  <div style="max-width:1100px">
+    <div style="font-family:var(--font-display);font-weight:800;font-size:20px;margin-bottom:var(--sp-xs)">RGX<span style="color:var(--blue)">-Engage</span></div>
+    <p style="opacity:0.7;font-size:14px;margin-bottom:var(--sp-sm)">Document Design System v1.0 — Information-enabled governance that scales.</p>
+    <p style="opacity:0.5;font-size:12px">Typography: Montserrat (headings) + Source Sans Pro (body) + JetBrains Mono (code)</p>
+    <p style="opacity:0.5;font-size:12px">Generated March 2026 · Based on RGX-Engage Brand Blueprint v2.1</p>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
